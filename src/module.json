@@ -1,0 +1,30 @@
+{
+  "id": "sr5-hud",
+  "title": "SR5 HUD",
+  "version": "0.0.1",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "shadowrun5e",
+        "type": "system",
+        "compatibility": {}
+      }
+    ]
+  },
+  "authors": [
+    {
+      "name": "Stexinator",
+      "discord": "Stexinator",
+      "flags": {}
+    },
+    {
+      "name": "Shadow",
+      "discord": "shadows_plays",
+      "flags": {}
+    }
+  ]
+}
