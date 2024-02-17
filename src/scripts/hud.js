@@ -22,23 +22,23 @@ export default class Hud extends Application {
       }
 
     setHooks() {
-        // this.hooks = [
-        //     {
-        //         hook: "updateActor",
-        //         fn: this.updateBiomon.bind(this),
-        //     },
-        //     {
-        //         hook: "deleteActiveEffect",
-        //         fn: this.updateBiomon.bind(this),
-        //     },
-        //     {
-        //         hook: "createActiveEffect",
-        //         fn: this.updateBiomon.bind(this),
-        //     },
-        // ];
-        // for (let hook of this.hooks) {
-        //     hook.id = Hooks.on(hook.hook, hook.fn);
-        // }
+        this.hooks = [
+            {
+                hook: "updateActor",
+                fn: this.updateHud.bind(this),
+            },
+            {
+                hook: "deleteActiveEffect",
+                fn: this.updateHud.bind(this),
+            },
+            {
+                hook: "createActiveEffect",
+                fn: this.updateHud.bind(this),
+            },
+        ];
+        for (let hook of this.hooks) {
+            hook.id = Hooks.on(hook.hook, hook.fn);
+        }
     }
 
     updateHud() {
