@@ -159,6 +159,22 @@
            height: 4em; 
         }
     }
+    .action::before{
+        content: ''; /* Required for pseudo-elements */
+        position: absolute;
+        top: -10px; /* Adjust this value to cover the gap */
+        left: 0;
+        width: 100%; /* Match the width of .action */
+        height: 10px; /* Height of the invisible hover bridge */
+        background: transparent; /* Invisible */
+        pointer-events: visible; /* Ensures it doesn’t interfere with other mouse events */
+    }
+    .action:hover .list-items-container, .list-items-container:hover {
+        display: grid; /* Show on hover */
+        .sr5-hud-list-item{
+            display: grid;
+        }
+    }
     .list-items-container {
         display: none; /* Hidden by default, shown on hover */
         position: absolute;
@@ -172,11 +188,26 @@
         overflow: hidden; /* Prevents overflow outside the container */
         grid-template-rows: repeat(auto-fill, minmax(44px, auto)); /* Adjust row height as needed */
         grid-auto-flow: column; /* Directs items to new columns once the height exceeds container's limit */
-        grid-auto-columns: minmax(auto, 100px); /* Adjust column width as needed */
+        grid-auto-columns: minmax(auto, 60px); /* Adjust column width as needed */
         align-content: start; /* Aligns content to the top */
         gap: 0.1em; /* Space between items */
         padding: 0.3em; /* Padding inside the container */
         z-index: 100; /* Ensure it's above other elements */
+        /* Transition for smoother appearance/disappearance */
+        transition: opacity 0.2s ease-in-out;
+        opacity: 0; /* Start fully transparent */
+        pointer-events: none; /* Ignore pointer events when not visible */
+    }
+    .action:hover .list-items-container, .list-items-container:hover {
+        opacity: 1; /* Fully visible when hovered */
+        pointer-events: all; /* React to pointer events when visible */
+        display: grid; /* Override the 'none' display */
+    }
+    .action.blank:hover .list-items-container {
+        display: grid; /* Show on hover */
+        .sr5-hud-list-item{
+            display: grid;
+        }
     }
     .sr5-hud-list-item {
         /* Styles for individual list items, e.g., background, color, padding */
@@ -189,23 +220,6 @@
         width: 4em;
         display: none;
         align-content: center;
-    }
-    /*@media (max-width: 600px) {
-        .list-items-container {
-            max-height: 150px; /* Adjust for smaller screens
-        }
-    }*/
-    .action:hover .list-items-container {
-        display: grid; /* Show on hover */
-        .sr5-hud-list-item{
-            display: grid;
-        }
-    }
-    .action.blank:hover .list-items-container {
-        display: grid; /* Show on hover */
-        .sr5-hud-list-item{
-            display: grid;
-        }
     }
     .action-skills{
         .sr5-hud-list-item{
