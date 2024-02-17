@@ -2,7 +2,7 @@
 export default class ActorData{
 
     static getActor() {
-        return game.user.character;
+        return ui.SR5HUD.actor ?? game.user.character;
     }
 
     static getPhysicalTrack(actor) {

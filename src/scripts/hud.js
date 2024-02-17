@@ -4,6 +4,7 @@ export default class Hud extends Application {
     constructor() {
         super();
         this.setHooks();
+        this.actor = null;
     }
 
     static get defaultOptions() {
