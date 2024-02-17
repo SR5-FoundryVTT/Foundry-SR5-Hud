@@ -1,0 +1,254 @@
+.sr5-hud{
+    background: rgba(0, 0, 0, 0.596);
+    &.mainContent{
+        width: 73.2em;
+    }
+    .grid{
+        display: grid;
+    }
+    .col7{
+        grid-template-columns: 16.5em 1em 4em auto auto auto 1em;
+    }
+    .header-bar {
+        margin: 0.2em;
+        display: grid; /* Using grid layout */
+        grid-template-columns: repeat(3, 1fr); /* Adjust based on the number of icons or elements you want to include */
+        align-items: center; /* Center items vertically */
+        padding: 10px; /* Add some padding around the contents */
+        background: linear-gradient(to right, #007bff, #6610f2); /* A gradient background for a modern look */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+        border-radius: 5px; /* Rounded corners for a polished look */
+        color: white; /* Text color, if you have any text inside */
+        gap: 10px; /* Space between grid items */
+        width: 17.5em;
+        &.row1-col3start{
+            grid-row-start: 1;
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+    }
+    .icon-character{
+        grid-column-start: 1;
+        &.left{
+            display: flex;
+            justify-content: left;
+        }
+    }
+    .icon-minimize{
+        grid-column-start: 3;
+        &.right{
+            display: flex;
+            justify-content: right;
+        }
+    }
+    .avatar{
+        display: grid;
+        width: max-content;
+        grid-template-columns: auto auto auto;
+    }
+    .row2start{
+        grid-row-start: 2;
+        grid-row-end: 2;
+    }
+    .section-wrapper{
+        display: grid;
+        grid-template-columns: auto auto auto;
+        margin: 0.4em;
+    }
+    .avatar-image {
+        width: 16em;
+        height: 16em;
+        display: flex; /* Flex layout for any content inside, if any */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        margin: 0.05em;
+        border: 1px solid aqua; /* Frame effect */
+        border-radius: 0.3em; /* Rounded corners */
+        background-color: #99ebc254; /* Background color */
+        /*background-image: url('path-to-your-image.jpg'); Adjust with your image path */
+        background-position: center; /* Center the background image */
+        background-size: contain; /* Ensure the image fits within the div, maintaining aspect ratio */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        margin-right: 0.5em;
+    }
+    
+    .movement {
+        align-content: center;
+        color: aqua;
+        margin: 0.02em;
+        border: 1px solid black;
+        display: block;
+        grid-row-start: 1;
+        grid-row-end: -1;
+        grid-column-start: 3;
+        background-color: green;
+        background-position: center;
+        width: 0.5em;
+    }
+    .movement:hover {
+        border: 1px solid lightcoral; /* Light red border on hover */
+    }
+    
+    .actor-box{
+        display: grid;
+    }
+    .effects-icons-bar{
+        grid-row-start: 2;
+        grid-column-start: 3;
+        grid-row-end: 5;
+        .effects{
+            color: azure;
+        }
+    }
+    .hp{
+        grid-row-start: 3;
+        margin-left: 0.5em;
+        margin-bottom: 0.25em;
+        width: 15.5em;
+        color: #6610f2;
+        border: 0.1em solid rgb(86, 5, 139);
+        display: grid;
+    }
+    .stun{
+        grid-row-start: 4;
+        margin-left: 0.5em;
+        margin-bottom: 0.25em;
+        width: 15.5em;
+        color: #007bff;
+        border: 0.1em solid #075bb4;
+        display: grid;
+    }
+    .nav-selector-actions-skills{
+        display: inline-grid;
+        grid-row-start: 2;
+        grid-column-start: 4;
+        grid-column-end: 7;
+        grid-row-end: 2;
+        .action-skills{
+            background: #615f5fb4;
+        }
+    }
+    .actions-bar{
+        grid-column-start: 4;
+        grid-row-start: 3;
+        grid-column-end: 7;
+        grid-row-end: 5;
+        margin: 0.3em;
+        &.col10{
+            display: grid;
+            grid-template-columns: 5em 5em 5em 5em 5em 5em 5em 5em 5em 5em;
+            column-gap: 0.1em;
+        }
+    }
+    .action{
+        height: 5em;
+        width: 5em;
+        background-color: rgba(255, 228, 196, 0.164);
+        border: 0.2em solid #626363;
+        border-radius: 0.2em;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.blank{
+            background-color: bisque;
+            border: 0.2em solid #626363;
+        }
+        &img{
+           width: 4em;
+           height: 4em; 
+        }
+    }
+    .list-items-container {
+        display: none; /* Hidden by default, shown on hover */
+        position: absolute;
+        bottom: 110%; /* Adjust if necessary to position correctly */
+        left: -2px; /* Start from the left edge of the .action */
+        width: 400px; /* Fixed width; adjust as needed */
+        height: 16.8em; /* Fixed height; adjust as needed to fit a certain number of items before wrapping */
+        background: rgba(0, 0, 0, 0.6); /* Optional: for visibility during styling; can be removed */
+        border: 1px solid #626363; /* Optional: for visibility during styling; can be removed */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow for depth */
+        overflow: hidden; /* Prevents overflow outside the container */
+        grid-template-rows: repeat(auto-fill, minmax(44px, auto)); /* Adjust row height as needed */
+        grid-auto-flow: column; /* Directs items to new columns once the height exceeds container's limit */
+        grid-auto-columns: minmax(auto, 100px); /* Adjust column width as needed */
+        align-content: start; /* Aligns content to the top */
+        gap: 0.1em; /* Space between items */
+        padding: 0.3em; /* Padding inside the container */
+        z-index: 100; /* Ensure it's above other elements */
+    }
+    .sr5-hud-list-item {
+        /* Styles for individual list items, e.g., background, color, padding */
+        background-color: #fff; /* Example styling */
+        color: #000; /* Example styling */
+        padding: 5px; /* Example styling */
+        text-align: center; /* Example styling */
+        border-radius: 4px; /* Example styling */
+        height: 3em;
+        width: 4em;
+        display: none;
+        align-content: center;
+    }
+    /*@media (max-width: 600px) {
+        .list-items-container {
+            max-height: 150px; /* Adjust for smaller screens
+        }
+    }*/
+    .action:hover .list-items-container {
+        display: grid; /* Show on hover */
+        .sr5-hud-list-item{
+            display: grid;
+        }
+    }
+    .action.blank:hover .list-items-container {
+        display: grid; /* Show on hover */
+        .sr5-hud-list-item{
+            display: grid;
+        }
+    }
+    .action-skills{
+        .sr5-hud-list-item{
+            height: 5em;
+            width: 5em;
+            background-color: bisque;
+            border: 0.2em solid #626363;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &img{
+                contain: content;
+            }
+        }
+    }
+    /*.blank{
+        display: none;
+    }*/
+    .end-bar{
+        &.visible{
+            background-color: red;
+            width: 0.3em;
+            grid-column-start: 7;
+            grid-row-start: 3;
+            grid-row-end: 5;
+        }
+    }
+    .fa-solid.fa-circle-plus{
+        &.sr5-hud-icons{
+            font-size: 3.5em;
+            color: #979797;
+        }
+        &.blank{
+            display: none;
+        }
+    }
+    .fa-solid.fa-circle-plus:hover{
+        &.sr5-hud-icons{
+            font-size: 3.5em;
+            color: #d6b80c;
+        }
+        &.blank{
+            display: none;
+        }
+    }
+}
