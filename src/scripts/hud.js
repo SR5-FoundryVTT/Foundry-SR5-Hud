@@ -53,18 +53,8 @@ export default class Hud extends Application {
     }
 
     getData() {
-        let actor = ActorData.getActor()
-
-        let hudData ={
-            name: actor.name,
-            id: actor.uuid,
-            image: ActorData.getImage(actor),
-            physTrack: ActorData.getPhysicalTrack(actor),
-            stunTrack: ActorData.getStunTrack(actor),
-            statuses: ActorData.getStatus(actor)
-        };
-
-        return { actor: hudData };
+        console.log(ActorData.getActorData())
+        return ActorData.getActorData();
     }
 
     async close(...args) {
