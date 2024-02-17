@@ -4,6 +4,7 @@ export default class Hud extends Application {
     constructor() {
         super();
         this.setHooks();
+        this.actor = null;
     }
 
     static get defaultOptions() {
@@ -52,18 +53,8 @@ export default class Hud extends Application {
     }
 
     getData() {
-        let actor = ActorData.getActor()
-
-        let hudData ={
-            name: actor.name,
-            id: actor.uuid,
-            image: ActorData.getImage(actor),
-            physTrack: ActorData.getPhysicalTrack(actor),
-            stunTrack: ActorData.getStunTrack(actor),
-            statuses: ActorData.getStatus(actor)
-        };
-
-        return { actor: hudData };
+        console.log(ActorData.getActorData())
+        return ActorData.getActorData();
     }
 
     async close(...args) {

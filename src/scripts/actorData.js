@@ -2,7 +2,25 @@
 export default class ActorData{
 
     static getActor() {
-        return game.user.character;
+        return ui.SR5HUD.actor ?? game.user.character;
+    }
+
+    static getActorData() {
+        let actor = ActorData.getActor();
+        return {
+            actor: {
+                name: actor.name,
+                id: actor.uuid,
+                image: ActorData.getImage(actor),
+                physTrack: ActorData.getPhysicalTrack(actor),
+                stunTrack: ActorData.getStunTrack(actor),
+                statuses: ActorData.getStatus(actor),
+            },
+            weapons: ActorData.getWeapons(actor),
+            spells: ActorData.getSpells(actor),
+            adeptPowers: ActorData.getAdeptPowers(actor),
+            actions: ActorData.getActions(actor)
+        }
     }
 
     static getPhysicalTrack(actor) {
@@ -29,6 +47,31 @@ export default class ActorData{
 
     static getImage(actor) {
         return actor?.img ?? "icons/svg/mystery-man.svg"
+    }
+
+    static getWeapons(actor) {
+        return actor.items.filter(item => item.type == "weapon").filter(weapon => weapon.system.technology.equipped)
+    }
+
+    static getSpells(actor) {
+        let unsorted = actor.items.filter(item => item.type == "spell")
+
+        let spells = {
+            combat: unsorted.filter(spell => spell.system.category === "combat"),
+            detection: unsorted.filter(spell => spell.system.category === "detection"),
+            manipulation: unsorted.filter(spell => spell.system.category === "manipulation"),
+            illusion: unsorted.filter(spell => spell.system.category === "illusion"),
+            health: unsorted.filter(spell => spell.system.category === "health")
+        }
+        return spells;
+    }
+
+    static getAdeptPowers(actor) {
+        return actor.items.filter(item => item.type == "adept_power").filter(power => power.system.type != "passive")
+    }
+
+    static getActions(actor) {
+        return actor.items.filter(item => item.type == "action")
     }
 
 }
