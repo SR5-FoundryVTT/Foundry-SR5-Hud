@@ -2,7 +2,11 @@
 export default class ActorData{
 
     static getActor() {
-        return ui.SR5HUD.actor ?? game.user.character;
+        return ui.SR5HUD.actor;
+    }
+
+    static getTokenActor() {
+        return ui.SR5HUD.tokenActor;
     }
 
     static getActorData() {
@@ -12,27 +16,46 @@ export default class ActorData{
                 name: actor.name,
                 id: actor.uuid,
                 image: ActorData.getImage(actor),
-                physTrack: ActorData.getPhysicalTrack(actor),
-                stunTrack: ActorData.getStunTrack(actor),
-                statuses: ActorData.getStatus(actor),
+                physTrack: ActorData.getPhysicalTrack(),
+                stunTrack: ActorData.getStunTrack(),
+                statuses: ActorData.getStatus(),
             },
-            weapons: ActorData.getWeapons(actor),
-            spells: ActorData.getSpells(actor),
-            adeptPowers: ActorData.getAdeptPowers(actor),
-            actions: ActorData.getActions(actor)
+            data: {
+                skills: ActorData.getSkills(actor),
+                weapons: ActorData.getWeapons(actor),
+                spells: ActorData.getSpells(actor),
+                adeptPowers: ActorData.getAdeptPowers(actor),
+                actions: ActorData.getActions(actor)
+            }
         }
     }
 
-    static getPhysicalTrack(actor) {
-        return actor?.system.track?.physical
+    static getPhysicalTrack() {
+        if(ActorData.getTokenActor().actorLink) {
+            return ActorData.getActor()?.system.track?.physical
+        }
+        if(!ActorData.getTokenActor().actorLink) {
+            return ActorData.getTokenActor()?.delta.system.track?.physical ?? {value: 0}
+        }
     }
 
-    static getStunTrack(actor) {
-        return actor?.system.track?.stun
+    static getStunTrack() {
+        if(ActorData.getTokenActor().actorLink) {
+            return ActorData.getActor()?.system.track?.stun
+        }
+        if(!ActorData.getTokenActor().actorLink) {
+            return ActorData.getTokenActor()?.delta.system.track?.stun ?? {value: 0}
+        }
     }
 
     static getStatus(actor) {
-        let statusIds = actor?.statuses ?? []
+        let statusIds;
+        if(ActorData.getTokenActor().actorLink) {
+            statusIds = ActorData.getActor()?.statuses ?? []
+        }
+        if(!ActorData.getTokenActor().actorLink) {
+            statusIds = ActorData.getTokenActor()?.delta.statuses ?? []
+        }
         
         let status = [];
         statusIds.forEach(search => {
@@ -72,6 +95,25 @@ export default class ActorData{
 
     static getActions(actor) {
         return actor.items.filter(item => item.type == "action")
+    }
+
+    static getSkills(actor) {
+        let skills = {
+            ...actor.system.skills.active,
+            ...actor.system.skills.knowledge,
+            ...actor.system.skills.language,
+        }
+
+        let skillsWithRating = [];
+        for (var skill in skills) {
+            if(skills[skill].value > 0) {
+                skillsWithRating.push({
+                    [skill]: skills[skill]
+                })
+            }
+         }
+
+         return skillsWithRating
     }
 
 }
