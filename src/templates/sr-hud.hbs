@@ -20,8 +20,22 @@
             </div>
             <div class="end-bar hidden">
             </div>
-            <div class="hp">hp</div>
-            <div class="stun">stun</div>
+            <div class="hp">hp
+                {{#for 0 this.physTrack.value}}
+                <div class="sr5-hud-physik-filled sr5-hud-track"></div>
+                {{/for}}
+                {{#for this.physTrack.value this.physTrack.max}}
+                <div class="sr5-hud-physik sr5-hud-track"></div>
+                {{/for}}
+            </div>
+            <div class="stun">stun
+                {{#for 0 this.stunTrack.value }}
+                <div class="sr5-hud-stun-filled sr5-hud-track"></div>
+                {{/for}}
+                {{#for this.stunTrack.value this.stunTrack.max}}
+                <div class="sr5-hud-stun sr5-hud-track"></div>
+                {{/for}}
+            </div>
             <div class="effects-icons-bar row2-col4start">
                 <div class="effects">effects</div>
             </div>

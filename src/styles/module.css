@@ -1,3 +1,26 @@
+/* Varibles*/
+:root{
+    --primaryBackground: rgba(0, 0, 0, 0.445);
+    --buttonMain: rgb(83, 1, 1);
+    --buttonsecdry: rgb(4, 4, 170);
+    --health: rgb(231, 41, 41);
+    --stun: rgb(15, 70, 250); 
+    --buttonlight: rgb(255, 171, 171);
+    --buttonHighlight: rgb(207, 194, 7);
+    --mainHeading: rgb(189, 189, 23);
+    --systemFonts: 'Signika', 'Palatino Linotype', serif;
+    --editorFonts: "klavika-medium";
+    --emptyBoxBorder: rgba(255, 255, 212, 0.466);
+    --emptyBox: #f5f5dc59;
+    --standardPadding: 0.25em;
+    --boxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
+    8px 0 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the right */
+  
+    --topBoxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
+    8px 0 6px -6px rgba(0, 0, 0, 0.6), /* Horizontal shadow on the right */
+    0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
+    --headerImage: url('../assets/biomon-header.webp') no-repeat center center;
+  }
 .sr5-hud{
     background: rgba(0, 0, 0, 0.596);
     &.mainContent{
@@ -264,5 +287,56 @@
         &.blank{
             display: none;
         }
+    }
+    /* Container for Physik boxes */
+    .sr5-hud-physik {
+    grid-row: 1; /* Physik boxes in the first row */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+    }
+  
+    /* Container for Stun boxes */
+    .sr5-hud-stun {
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+    }
+    /* Styles for filled and empty Physik boxes */
+    .sr5-hud-physik-filled,
+    .sr5-hud-physik {
+    grid-auto-columns: auto;
+    grid-row: 1;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.2em;
+    }
+
+    .sr5-hud-physik-filled {
+    background-color: var(--health); /* Red for filled Physik */
+    }
+
+    .sr5-hud-physik {
+    border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Physik */
+    background: var(--emptyBox);
+    }
+
+    /* Styles for filled and empty Stun boxes */
+    .sr5-hud-stun-filled,
+    .sr5-hud-stun {
+    grid-auto-columns: auto;
+    grid-row: 2;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.2em;
+    margin-bottom: 0.2em;
+    }
+
+    .sr5-hud-stun-filled {
+    background-color: var(--stun); /* Blue for filled Stun */
+    }
+
+    .sr5-hud-stun {
+    border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Stun */
+    background: var(--emptyBox);
     }
 }
