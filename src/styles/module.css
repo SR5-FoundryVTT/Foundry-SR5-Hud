@@ -1,3 +1,26 @@
+/* Varibles*/
+:root{
+    --primaryBackground: rgba(0, 0, 0, 0.445);
+    --buttonMain: rgb(83, 1, 1);
+    --buttonsecdry: rgb(4, 4, 170);
+    --health: rgb(231, 41, 41);
+    --stun: rgb(15, 70, 250); 
+    --buttonlight: rgb(255, 171, 171);
+    --buttonHighlight: rgb(207, 194, 7);
+    --mainHeading: rgb(189, 189, 23);
+    --systemFonts: 'Signika', 'Palatino Linotype', serif;
+    --editorFonts: "klavika-medium";
+    --emptyBoxBorder: rgba(255, 255, 212, 0.466);
+    --emptyBox: #f5f5dc59;
+    --standardPadding: 0.25em;
+    --boxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
+    8px 0 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the right */
+  
+    --topBoxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
+    8px 0 6px -6px rgba(0, 0, 0, 0.6), /* Horizontal shadow on the right */
+    0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
+    --headerImage: url('../assets/biomon-header.webp') no-repeat center center;
+  }
 .sr5-hud{
     background: rgba(0, 0, 0, 0.596);
     &.mainContent{
@@ -8,6 +31,7 @@
     }
     .col7{
         grid-template-columns: 16.5em 1em 4em auto auto auto 1em;
+        grid-template-rows: auto auto 2em 2em 1.5em;
     }
     .header-bar {
         margin: 0.2em;
@@ -98,9 +122,25 @@
         grid-row-end: 5;
         .effects{
             color: azure;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 0.4em;
         }
     }
-    .hp{
+    .effect-container{
+        width: 3em;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 2em 1em;
+        .effect-text {
+            color: var(--buttonHighlight);
+            font-size: 7px;
+            padding: 2px;
+            text-align: center;
+        }
+    }
+    .sr5-hud-hp-box{
         grid-row-start: 3;
         margin-left: 0.5em;
         margin-bottom: 0.25em;
@@ -108,8 +148,9 @@
         color: #6610f2;
         border: 0.1em solid rgb(86, 5, 139);
         display: grid;
+        grid-template-columns: auto;
     }
-    .stun{
+    .sr5-hud-stun-box{
         grid-row-start: 4;
         margin-left: 0.5em;
         margin-bottom: 0.25em;
@@ -117,6 +158,7 @@
         color: #007bff;
         border: 0.1em solid #075bb4;
         display: grid;
+        grid-template-columns: auto;
     }
     .nav-selector-actions-skills{
         display: inline-grid;
@@ -235,9 +277,9 @@
             }
         }
     }
-    /*.blank{
+    .blank{
         display: none;
-    }*/
+    }
     .end-bar{
         &.visible{
             background-color: red;
@@ -264,5 +306,58 @@
         &.blank{
             display: none;
         }
+    }
+    /* Container for Physik boxes */
+    .sr5-hud-physik {
+    grid-row: 1; /* Physik boxes in the first row */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+    }
+  
+    /* Container for Stun boxes */
+    .sr5-hud-stun {
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+    }
+    /* Styles for filled and empty Physik boxes */
+    .sr5-hud-physik-filled,
+    .sr5-hud-physik {
+        grid-auto-columns: auto;
+        grid-row: 1;
+        width: 1em;
+        height: 1em;
+        margin-right: 0.2em;
+        margin-top: 0.25em;
+        margin-left: 0.25em;
+    }
+
+    .sr5-hud-physik-filled {
+    background-color: var(--health); /* Red for filled Physik */
+    }
+
+    .sr5-hud-physik {
+    border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Physik */
+    background: var(--emptyBox);
+    }
+
+    /* Styles for filled and empty Stun boxes */
+    .sr5-hud-stun-filled,
+    .sr5-hud-stun {
+        grid-auto-columns: auto;
+        grid-row: 2;
+        width: 1em;
+        height: 1em;
+        margin-right: 0.2em;
+        margin-left: 0.25em;
+    }
+
+    .sr5-hud-stun-filled {
+    background-color: var(--stun); /* Blue for filled Stun */
+    }
+
+    .sr5-hud-stun {
+    border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Stun */
+    background: var(--emptyBox);
     }
 }
