@@ -31,6 +31,7 @@
     }
     .col7{
         grid-template-columns: 16.5em 1em 4em auto auto auto 1em;
+        grid-template-rows: auto auto 2em 2em 1.5em;
     }
     .header-bar {
         margin: 0.2em;
@@ -121,9 +122,25 @@
         grid-row-end: 5;
         .effects{
             color: azure;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 0.4em;
         }
     }
-    .hp{
+    .effect-container{
+        width: 3em;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 2em 1em;
+        .effect-text {
+            color: var(--buttonHighlight);
+            font-size: 7px;
+            padding: 2px;
+            text-align: center;
+        }
+    }
+    .sr5-hud-hp-box{
         grid-row-start: 3;
         margin-left: 0.5em;
         margin-bottom: 0.25em;
@@ -131,8 +148,9 @@
         color: #6610f2;
         border: 0.1em solid rgb(86, 5, 139);
         display: grid;
+        grid-template-columns: auto;
     }
-    .stun{
+    .sr5-hud-stun-box{
         grid-row-start: 4;
         margin-left: 0.5em;
         margin-bottom: 0.25em;
@@ -140,6 +158,7 @@
         color: #007bff;
         border: 0.1em solid #075bb4;
         display: grid;
+        grid-template-columns: auto;
     }
     .nav-selector-actions-skills{
         display: inline-grid;
@@ -258,9 +277,9 @@
             }
         }
     }
-    /*.blank{
+    .blank{
         display: none;
-    }*/
+    }
     .end-bar{
         &.visible{
             background-color: red;
@@ -304,11 +323,13 @@
     /* Styles for filled and empty Physik boxes */
     .sr5-hud-physik-filled,
     .sr5-hud-physik {
-    grid-auto-columns: auto;
-    grid-row: 1;
-    width: 0.5em;
-    height: 0.5em;
-    margin-right: 0.2em;
+        grid-auto-columns: auto;
+        grid-row: 1;
+        width: 1em;
+        height: 1em;
+        margin-right: 0.2em;
+        margin-top: 0.25em;
+        margin-left: 0.25em;
     }
 
     .sr5-hud-physik-filled {
@@ -323,12 +344,12 @@
     /* Styles for filled and empty Stun boxes */
     .sr5-hud-stun-filled,
     .sr5-hud-stun {
-    grid-auto-columns: auto;
-    grid-row: 2;
-    width: 0.5em;
-    height: 0.5em;
-    margin-right: 0.2em;
-    margin-bottom: 0.2em;
+        grid-auto-columns: auto;
+        grid-row: 2;
+        width: 1em;
+        height: 1em;
+        margin-right: 0.2em;
+        margin-left: 0.25em;
     }
 
     .sr5-hud-stun-filled {
