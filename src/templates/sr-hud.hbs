@@ -13,9 +13,7 @@
             <div class="avatar row2start">
                 <div class="section-wrapper">
                     <div class="avatar-image">
-                        {{#each actors}}
-                            <img src="{{this.actor.image}}" Title="{{this.actor.name}}">
-                        {{/each}}
+                        <img src="{{this.actor.image}}" Title="{{this.actor.name}}">
                     </div>
                     <!--Move section, not sure yet how bring in the movement meters into a bar, maybe gradiant coloring-->
                     <div class="movement">
@@ -27,28 +25,28 @@
             </div>
             <div class="sr5-hud-hp-box">
                 {{#for 0 this.actor.physTrack.value}}
-                <div class="sr5-hud-physik-filled sr5-hud-track"></div>
+                    <div class="sr5-hud-physik-filled sr5-hud-track"></div>
                 {{/for}}
                 {{#for this.actor.physTrack.value this.actor.physTrack.max}}
-                <div class="sr5-hud-physik sr5-hud-track"></div>
+                    <div class="sr5-hud-physik sr5-hud-track"></div>
                 {{/for}}
             </div>
             <div class="sr5-hud-stun-box">
                 {{#for 0 this.actor.stunTrack.value }}
-                <div class="sr5-hud-stun-filled sr5-hud-track"></div>
+                    <div class="sr5-hud-stun-filled sr5-hud-track"></div>
                 {{/for}}
                 {{#for this.actor.stunTrack.value this.actor.stunTrack.max}}
-                <div class="sr5-hud-stun sr5-hud-track"></div>
+                    <div class="sr5-hud-stun sr5-hud-track"></div>
                 {{/for}}
             </div>
             <!--Main End, Effects Start-->
             <div class="effects-icons-bar row2-col4start">
                 <div class="effects">
                     {{#each this.actor.statuses}}
-                    <div class="effect-container">
-                        <img src='{{this.img}}' title='{{localize this.name}}'>
-                        <div class="effect-text">Special Text</div>
-                    </div>
+                        <div class="effect-container">
+                            <img src='{{this.img}}' title='{{localize this.name}}'>
+                            <div class="effect-text">Special Text</div>
+                        </div>
                     {{/each}}
                     <div class="effect-container"></div>
                 </div>
