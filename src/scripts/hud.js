@@ -6,6 +6,7 @@ export default class Hud extends Application {
         this.setHooks();
         this.actor = null;
         this.tokenActor = null;
+        this.actorData = new ActorData();
     }
 
     static get defaultOptions() {
@@ -23,19 +24,51 @@ export default class Hud extends Application {
         }
       }
 
+    renderTokenHud(html, tokenActor) {
+        if(tokenActor.actorLink) {
+            html = html[0];
+            const button = document.createElement("div");
+            button.classList.add("control-icon");
+            button.innerHTML = '<i class="fa-duotone fa-street-view"></i>';
+            html.querySelector(".col.left").prepend(button);
+            button.onclick = (event) => {
+               if(this.rendered) {
+                this.close();
+               }
+               else {
+                this.updateActor(tokenActor);
+                this.render(true);
+               }
+            };
+         }
+    }
+
+    activateListeners(html) {
+        console.log(html[0])
+        let bar = html.find('.actions-bar')
+        console.log(bar)
+    }
+
+    updateActor(tokenActor) {
+        this.tokenActor = tokenActor;
+        this.actor = game.actors.get(tokenActor.actorId);
+        this.actorData.actor = this.actor;
+        this.actorData.tokenActor = this.tokenActor;
+    }
+
     setHooks() {
         this.hooks = [
             {
                 hook: "updateActor",
-                fn: this.updateHud.bind(this),
+                fn: this.updateHudActor.bind(this),
             },
             {
                 hook: "deleteActiveEffect",
-                fn: this.updateHud.bind(this),
+                fn: this.updateHudEffect.bind(this),
             },
             {
                 hook: "createActiveEffect",
-                fn: this.updateHud.bind(this),
+                fn: this.updateHudEffect.bind(this),
             },
         ];
         for (let hook of this.hooks) {
@@ -43,8 +76,18 @@ export default class Hud extends Application {
         }
     }
 
-    updateHud() {
-        this.render()
+    updateHudActor(actor) {
+        if(actor.id === this.actor?.id) {
+            console.log("rerendered")
+            this.render()
+        }
+    }
+
+    updateHudEffect(effect) {
+        if(effect.parent.id === this.actor?.id) {
+            console.log("rerendered")
+            this.render()
+        }
     }
 
     removeHooks() {
@@ -54,8 +97,7 @@ export default class Hud extends Application {
     }
 
     getData() {
-        console.log(ActorData.getActorData())
-        return ActorData.getActorData();
+        return this.actorData.actorData;
     }
 
     async close(...args) {

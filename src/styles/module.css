@@ -315,16 +315,16 @@
     }
     /* Container for Physik boxes */
     .sr5-hud-physik {
-    grid-row: 1; /* Physik boxes in the first row */
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+        grid-row: 1; /* Physik boxes in the first row */
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
     }
   
     /* Container for Stun boxes */
     .sr5-hud-stun {
-    grid-row: 2;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
     }
     /* Styles for filled and empty Physik boxes */
     .sr5-hud-physik-filled,
