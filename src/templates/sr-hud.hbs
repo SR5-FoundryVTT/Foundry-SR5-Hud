@@ -55,88 +55,132 @@
             </div>
             <!--Effects End, Skills and Actions Start-->
             <div class="nav-selector-actions-skills">
-                <div class="action-skills">skill-list area
+                <div class="action-skills gone">
                     <!--<div class="sr5-hud-list-item">Select Action</div>-->
                 </div>
             </div>
             <div class="actions-bar col10">
-                <div class="action">
-                    <i class="fa-solid fa-circle-plus sr5-hud-icons blank"></i>
-                    action icon image here + text
-                    <!--This container will move into nav-selector-actions-skills div for all-->
-                    <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                    </div>
-                </div>
-                <div class="action blank">
+                <!-- This is for the Weapon Boxes-->
+                <div class="sr5-hud-action sr5-hud-weapon">
+                    <!--Here a Weapon Icon for a Gun-->
                     <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
+                    {{#if this.data.weapons.rangedWeapons}}
                     <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
+                        {{#each this.data.weapons.rangedWeapons}}
+                            <img src='{{this.img}}' title='{{this.name}}'>
+                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                        {{/each}}
                     </div>
+                    {{/if}}
                 </div>
-                <div class="action blank gone">
+                <div class="sr5-hud-action sr5-hud-weapon">
+                    <!--Here a Weapon Icon for a Gun-->
                     <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
+                    {{#if this.data.weapons.rangedWeapons}}
                     <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
+                        {{#each this.data.weapons.rangedWeapons}}
+                            <img src='{{this.img}}' title='{{this.name}}'>
+                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                        {{/each}}
                     </div>
+                    {{/if}}
                 </div>
-                <div class="action blank gone">
+                <!--This is the box for Melee Weapons only-->
+                <div class="sr5-hud-action sr5-hud-hand">
+                    <!--Here a Weapon icon for hand-->
                     <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
+                    {{#if this.data.weapons.meleeWeapons}}
+                        <div class="list-items-container">
+                            {{#each this.data.weapons.meleeWeapons}}
+                                <img src='{{this.img}}' title='{{this.name}}'>
+                                <div class="sr5-hud-list-item">{{this.name}}</div>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                </div>
+                <!--This is for Actions-->
+                {{#if this.data.actions}}
+                <div class="sr5-hud-action sr5-hud-actions">
+                    Actions
                     <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
+                            {{#each this.data.actions}}
+                            <img src='{{this.img}}' title='{{this.name}}'>
+                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                            {{/each}}
                     </div>
                 </div>
-                <div class="action blank gone">
-                    <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
+                {{/if}}
+                <!--This is for Contacts-->
+                {{#if this.data.contacts}}
+                <div class="sr5-hud-action sr5-hud-contacts">
+                    Contacts
                     <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
+                            {{#each this.data.contacts}}
+                            <img src='{{this.img}}' title='{{this.name}}'>
+                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                            {{/each}}
                     </div>
                 </div>
-                <div class="action blank gone">
-                    <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
+                {{/if}}
+                {{#if this.data.spells.hasSpells}}
+                <!--This is for Spells-->
+                <div class="sr5-hud-action spells">
+                    Spells
+                    <!--Spell background image-->   
                     <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
+                        {{#each this.data.spells.combat}}
+                        <img src='{{this.img}}' title='this.name'>
+                        <div class="sr5-hud-list-item sr5-combat-spell">{{this.name}}</div>
+                        {{/each}}
+                        {{#each this.data.spells.detection}}
+                        <img src='{{this.img}}' title='this.name'>
+                            <div class="sr5-hud-list-item sr5-detection-spell">{{this.name}}</div>
+                        {{/each}}
+                        {{#each this.data.spells.manipulation}}
+                        <img src='{{this.img}}' title='this.name'>
+                            <div class="sr5-hud-list-item sr5-manip-spell">{{this.name}}</div>
+                        {{/each}}
+                        {{#each this.data.spells.illusion}}
+                        <img src='{{this.img}}' title='this.name'>
+                            <div class="sr5-hud-list-item sr5-illusion-spell">{{this.name}}</div>
+                        {{/each}}
+                        {{#each this.data.spells.health}}
+                        <img src='{{this.img}}' title='this.name'>
+                            <div class="sr5-hud-list-item sr5-health-spell">{{this.name}}</div>
+                        {{/each}}
                     </div>
                 </div>
-                <div class="action blank gone">
-                    <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
+                {{/if}}
+                {{#if this.data.adeptPowers}}
+                <!--This is for Adept Powers-->
+                <div class="sr5-hud-action powers">
+                    Adept Powers
+                    <!--Advantages background image-->
                     <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
+                            {{#each this.data.adeptPowers}}
+                            <img src='{{this.img}}' title='{{this.name}}'>
+                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                            {{/each}}
                     </div>
                 </div>
-                <div class="action blank gone">
-                    <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
+                {{/if}}
+                {{#if this.data.qualitys.hasQualitys}}
+                <!--This is for Advantages Disadvantages-->
+                <div class="sr5-hud-action quality">
+                    <!--Advantages background image-->
+                    Advantages
                     <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
+                        {{#each this.data.qualitys.positive}}
+                        <img src='{{this.img}}' title='{{this.name}}'>
+                        <div class="sr5-hud-list-item sr5-hud-quality hud-positive">{{this.name}}</div>
+                        {{/each}}
+                        {{#each this.data.qualitys.negative}}
+                        <img src='{{this.img}}' title='{{this.name}}'>
+                        <div class="sr5-hud-list-item sr5-hud-quality hud-negative">{{this.name}}</div>
+                        {{/each}}
                     </div>
                 </div>
-                <div class="action blank gone">
-                    <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
-                    <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                    </div>
-                </div>
-                <div class="action blank gone">
-                    <i class="fa-solid fa-circle-plus sr5-hud-icons"></i>
-                    <div class="list-items-container">
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                        <div class="sr5-hud-list-item">Action or Skill</div>
-                    </div>
-                </div>
-            </div>
+                {{/if}}
             <!--End Bar moved to the end once end bar after image area is clicked-->
             <div class="end-bar visible">
 
