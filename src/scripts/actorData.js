@@ -1,4 +1,3 @@
-
 export default class ActorData{
 
     actor = null;
@@ -87,8 +86,7 @@ export default class ActorData{
 
     get spells() {
         let unsorted = this.actor.items.filter(item => item.type == "spell");
-
-        if(!unsorted) {
+        if(!unsorted || unsorted.length == 0) {
             return null;
         }
 
@@ -107,7 +105,7 @@ export default class ActorData{
     get qualities() {
         let unsorted = this.actor.items.filter(item => item.type == "quality");
 
-        if(!unsorted) {
+        if(!unsorted || unsorted.length == 0) {
             return null;
         }
 
