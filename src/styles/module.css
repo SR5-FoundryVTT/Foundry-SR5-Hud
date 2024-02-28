@@ -21,10 +21,27 @@
     0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
     --headerImage: url('../assets/biomon-header.webp') no-repeat center center;
   }
-.sr5-hud{
-    background: rgba(0, 0, 0, 0.596);
+
+  .app.window-app.sr5-hud .window-title{
+    display: none;
+  }
+  .app.window-app.sr5-hud, .window-content {
+    display: block !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+.window-app.sr5-hud .window-header {
+    display: none;
+    border-bottom: none;
+}
+  .sr5-hud{
+    /*background: rgba(0, 0, 0, 0.596);*/
     &.mainContent{
         width: 73.2em;
+    }
+    .window-header.flexrow.draggable.resizable{
+        background: none;
+        display: none
     }
     .grid{
         display: grid;
@@ -44,11 +61,10 @@
         border-radius: 5px; /* Rounded corners for a polished look */
         color: white; /* Text color, if you have any text inside */
         gap: 10px; /* Space between grid items */
-        width: 17.5em;
         &.row1-col3start{
             grid-row-start: 1;
             grid-column-start: 1;
-            grid-column-end: 3;
+            grid-column-end: 4;
         }
     }
     .icon-character{
@@ -69,15 +85,19 @@
         display: grid;
         width: max-content;
         grid-template-columns: auto auto auto;
+        background-color: #626363;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
     }
     .row2start{
         grid-row-start: 2;
-        grid-row-end: 2;
+        grid-row-end: 6;
     }
     .section-wrapper{
         display: grid;
         grid-template-columns: auto auto auto;
         margin: 0.4em;
+        background-color: #626363;
     }
     .avatar-image {
         width: 16em;
@@ -89,7 +109,6 @@
         border: 1px solid aqua; /* Frame effect */
         border-radius: 0.3em; /* Rounded corners */
         background-color: #99ebc254; /* Background color */
-        /*background-image: url('path-to-your-image.jpg'); Adjust with your image path */
         background-position: center; /* Center the background image */
         background-size: contain; /* Ensure the image fits within the div, maintaining aspect ratio */
         background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -119,7 +138,9 @@
     .effects-icons-bar{
         grid-row-start: 2;
         grid-column-start: 3;
-        grid-row-end: 5;
+        grid-row-end: 6;
+        background-color: #626363;
+        border-top-right-radius: 6px;
         .effects{
             color: azure;
             display: flex;
@@ -142,40 +163,33 @@
     }
     .sr5-hud-hp-box{
         grid-row-start: 3;
-        margin-left: 0.5em;
+        margin-top: 0.3em;
         margin-bottom: 0.25em;
         width: 15.5em;
-        color: #6610f2;
-        border: 0.1em solid rgb(86, 5, 139);
-        display: grid;
+        display: flex;
         grid-template-columns: auto;
     }
     .sr5-hud-stun-box{
         grid-row-start: 4;
-        margin-left: 0.5em;
+        margin-top: 0.3em;
         margin-bottom: 0.25em;
         width: 15.5em;
-        color: #007bff;
-        border: 0.1em solid #075bb4;
-        display: grid;
+        display: flex;
         grid-template-columns: auto;
     }
+    .checkbox-nav{
+        display: none;
+    }
     .nav-selector-actions-skills{
-        display: inline-grid;
-        grid-row-start: 2;
-        grid-column-start: 4;
-        grid-column-end: 7;
-        grid-row-end: 2;
-        .action-skills{
-            background: #615f5fb4;
-        }
+        display: none;
     }
     .actions-bar{
         grid-column-start: 4;
         grid-row-start: 3;
         grid-column-end: 7;
-        grid-row-end: 5;
-        margin: 0.3em;
+        grid-row-end: 6;
+        margin-top: 0.5em;
+        background-color: #626363;
         &.col10{
             display: grid;
             grid-template-columns: 4em 4em 4em 4em 4em 4em 4em 4em 4em 4em 4em 4em;
@@ -202,21 +216,9 @@
            height: 4em; 
         }
     }
-    .sr5-hud-action::before{
-        content: ''; /* Required for pseudo-elements */
-        position: absolute;
-        top: -10px; /* Adjust this value to cover the gap */
-        left: 0;
-        width: 100%; /* Match the width of .action */
-        height: 10px; /* Height of the invisible hover bridge */
-        background: transparent; /* Invisible */
-        pointer-events: visible; /* Ensures it doesn’t interfere with other mouse events */
-    }
-    .sr5-hud-action:hover .list-items-container, .list-items-container:hover {
+
+    .sr5-hud-action:hover {
         display: grid; /* Show on hover */
-        .sr5-hud-list-item{
-            display: grid;
-        }
     }
     .list-items-container {
         display: none; /* Hidden by default, shown on hover */
@@ -246,42 +248,57 @@
             background-image: none;
         }
     }
-    .sr5-hud-action:hover .list-items-container, .list-items-container:hover {
-        opacity: 1; /* Fully visible when hovered */
-        pointer-events: all; /* React to pointer events when visible */
-        display: grid; /* Override the 'none' display */
+    /* NAV Checkboxes*/
+    .sr5-hud-checkbox{
+        display: none;
     }
-    .sr5-hud-action.blank:hover .list-items-container {
-        display: grid; /* Show on hover */
+    .sr5-hud-checkbox ~ label{
+        display: grid;
+        transition: opacity 0.2s ease-in-out;
+        opacity: 1;
+    }
+    .sr5-hud-checkbox:checked ~ .list-items-container {
+        display: grid;
+        transition: opacity 0.2s ease-in-out;
+        opacity: 1;
+        pointer-events: all;
         .sr5-hud-list-item{
             display: grid;
         }
     }
     .sr5-hud-list-item {
         /* Styles for individual list items, e.g., background, color, padding */
-        background-color: #fff; /* Example styling */
-        color: #000; /* Example styling */
-        padding: 5px; /* Example styling */
-        text-align: center; /* Example styling */
-        border-radius: 4px; /* Example styling */
-        height: 3em;
-        width: 4em;
-        display: none;
+        display: none;       
+        text-align: center;
+        border-radius: 4px; 
+        height: 4em;
+        width: 3em;
         align-content: center;
+        grid-template-rows: auto auto;
     }
-    .action-skills{
-        .sr5-hud-list-item{
-            height: 5em;
-            width: 5em;
-            background-color: bisque;
-            border: 0.2em solid #626363;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            &img{
-                contain: content;
-            }
+    .sr5-hud-list-item.sr5-hud-quality.hud-negative{
+        > p {
+            font-size: 8px;
+            text-align: center;
+            color: rgb(206, 28, 37);
         }
+
+    }
+    .sr5-hud-list-item.sr5-hud-quality.hud-positive{
+        > p {
+            font-size: 8px;
+            text-align: center;
+            color: rgb(17, 236, 36);
+        }
+    }
+    .hud-positive:hover{
+        color: rgba(0, 255, 255, 0.24);
+    }
+    .action-image {
+        width: 3em;
+        height: 3em;
+        border: none;
+        padding-top: 0.5em;
     }
     .gone{
         display: none;
@@ -315,27 +332,22 @@
     }
     /* Container for Physik boxes */
     .sr5-hud-physik {
-        grid-row: 1; /* Physik boxes in the first row */
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+    grid-row: 1; /* Physik boxes in the first row */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
     }
   
     /* Container for Stun boxes */
     .sr5-hud-stun {
-        grid-row: 2;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
     }
     /* Styles for filled and empty Physik boxes */
     .sr5-hud-physik-filled,
     .sr5-hud-physik {
         grid-auto-columns: auto;
         grid-row: 1;
-        width: 1em;
-        height: 1em;
-        margin-right: 0.2em;
-        margin-top: 0.25em;
-        margin-left: 0.25em;
     }
 
     .sr5-hud-physik-filled {
@@ -352,12 +364,12 @@
     .sr5-hud-stun {
         grid-auto-columns: auto;
         grid-row: 2;
-        width: 1em;
-        height: 1em;
-        margin-right: 0.2em;
-        margin-left: 0.25em;
     }
-
+    .sr5-hud-track{
+        width: 0.5em;
+        height: 0.5em;
+        margin-left: 4.5px;
+    }
     .sr5-hud-stun-filled {
     background-color: var(--stun); /* Blue for filled Stun */
     }
@@ -366,4 +378,13 @@
     border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Stun */
     background: var(--emptyBox);
     }
+}
+.sr5-hud-frame{
+    display: none;
+}
+img.sr5-hud-character {
+    width: 16em;
+    border: none;
+    display: flex;
+    align-items: center;
 }

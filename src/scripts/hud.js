@@ -16,9 +16,9 @@ export default class Hud extends Application {
           title: "SR5-Hud",
           template: "modules/sr5-hud/templates/sr-hud.hbs",
           popOut: true,
-          top: 500,
-          left: 15,
-          resizable: true,
+          top: 632,
+          left: 5,
+          resizable: false,
           dragDrop: [{dragSelector: null, dropSelector: null}],
           classes: ["sr5-hud"]
         }
