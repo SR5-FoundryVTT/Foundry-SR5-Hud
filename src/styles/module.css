@@ -25,17 +25,18 @@
   .app.window-app.sr5-hud .window-title{
     display: none;
   }
-  .app.window-app.sr5-hud, .window-content {
+  .sr5-hud > section.window-content {
     display: block !important;
-    background: none !important;
     box-shadow: none !important;
+    background-image: url('../assets/frame.webp');
 }
 .window-app.sr5-hud .window-header {
     display: none;
     border-bottom: none;
 }
   .sr5-hud{
-    /*background: rgba(0, 0, 0, 0.596);*/
+    background-image: url('../assets/frame.webp'); /*Repeat needed as different elements needed to be tricked*/
+    box-shadow: none;
     &.mainContent{
         width: 73.2em;
     }
@@ -66,6 +67,10 @@
             grid-column-start: 1;
             grid-column-end: 4;
         }
+        &.sr5-hud-min {
+            position: relative;
+            top: 260px;
+        }
     }
     .icon-character{
         grid-column-start: 1;
@@ -89,7 +94,7 @@
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
     }
-    .row2start{
+    .grid-row2start-end6{
         grid-row-start: 2;
         grid-row-end: 6;
     }
@@ -102,9 +107,7 @@
     .avatar-image {
         width: 16em;
         height: 16em;
-        display: flex; /* Flex layout for any content inside, if any */
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
+        display: block;
         margin: 0.05em;
         border: 1px solid aqua; /* Frame effect */
         border-radius: 0.3em; /* Rounded corners */
@@ -113,6 +116,7 @@
         background-size: contain; /* Ensure the image fits within the div, maintaining aspect ratio */
         background-repeat: no-repeat; /* Prevents the image from repeating */
         margin-right: 0.5em;
+        contain: content;
     }
     
     .movement {
@@ -136,9 +140,7 @@
         display: grid;
     }
     .effects-icons-bar{
-        grid-row-start: 2;
         grid-column-start: 3;
-        grid-row-end: 6;
         background-color: #626363;
         border-top-right-radius: 6px;
         .effects{
@@ -147,6 +149,7 @@
             flex-direction: column;
             justify-content: center;
             margin-left: 0.4em;
+            margin-top: 0.5em;
         }
     }
     .effect-container{
@@ -261,6 +264,13 @@
         display: grid;
         transition: opacity 0.2s ease-in-out;
         opacity: 1;
+        pointer-events: all;
+        .sr5-hud-list-item{
+            display: grid;
+        }
+    }
+    .sr5-hud-action.quality:focus ~ .list-items-container{
+        display: grid;
         pointer-events: all;
         .sr5-hud-list-item{
             display: grid;

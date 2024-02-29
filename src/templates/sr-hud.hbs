@@ -1,6 +1,5 @@
 <div class="sr5-hud">
     <div class="sr5-hud mainContent grid col7">
-            <!--Main Avatar Start-->
             <div class="header-bar row1-col3start">
                 <div class="icon-character left">
                     <i class="fa-solid fa-user-secret"></i>
@@ -10,11 +9,12 @@
                     <i class="fa-solid fa-minimize"></i>
                 </div>
             </div>
-            <div class="avatar row2start">
-                <div class="section-wrapper">
-                    <div class="avatar-image">
+            <!--Avatar-->
+            <avatar class="avatar grid-row2start-end6">
+                <section class="section-wrapper">
+                    <avatar-image class="avatar-image">
                         <img class="sr5-hud-character" src="{{this.actor.image}}" Title="{{this.actor.name}}">
-                    </div>
+                    </avatar-image>
                     <!--Move section, not sure yet how bring in the movement meters into a bar, maybe gradiant coloring-->
                     <div class="movement">
                         
@@ -35,20 +35,19 @@
                         <div class="sr5-hud-stun sr5-hud-track"></div>
                         {{/for}}
                     </div>
-                </div>
-            </div>
+                </section>
+            </avatar>
             <div class="end-bar hidden">
             </div>
             <!--Main End, Effects Start-->
-            <div class="effects-icons-bar">
+            <div class="effects-icons-bar grid-row2start-end6">
                 <div class="effects">
                     {{#each this.actor.statuses}}
                     <div class="effect-container">
                         <img src='{{this.img}}' title='{{localize this.name}}'>
-                        <div class="effect-text">Special Text</div>
+                        <div class="effect-text">'{{localize this.name}}'</div>
                     </div>
                     {{/each}}
-                    <div class="effect-container"></div>
                 </div>
             </div>
             <!--Effects End, Skills and Actions Start-->
@@ -58,7 +57,7 @@
                 <!-- This is for the Weapon Boxes-->
                 <div class="sr5-hud-action sr5-hud-weapon">
                     <!--Here a Weapon Icon for a Gun-->
-                    <input type="checkbox" id="toggle-gun" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-gun" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-gun" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
                     {{#if this.data.weapons.rangedWeapons}}
                     <div class="list-items-container">
@@ -71,7 +70,7 @@
                 </div>
                 <div class="sr5-hud-action sr5-hud-weapon">
                     <!--Here a Weapon Icon for a Gun-->
-                    <input type="checkbox" id="toggle-weapon" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-weapon" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-weapon" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
                     {{#if this.data.weapons.rangedWeapons}}
                     <div class="list-items-container">
@@ -85,7 +84,7 @@
                 <!--This is the box for Melee Weapons only-->
                 <div class="sr5-hud-action sr5-hud-hand">
                     <!--Here a Weapon icon for hand-->
-                    <input type="checkbox" id="toggle-hand" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-hand" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-hand" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
                     {{#if this.data.weapons.meleeWeapons}}
                         <div class="list-items-container">
@@ -99,7 +98,7 @@
                 <!--This is for Actions-->
                 {{#if this.data.actions}}
                 <div class="sr5-hud-action sr5-hud-actions">
-                    <input type="checkbox" id="toggle-action" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-action" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-action" class="sr5-hud-nav-switch">Actions</label>
                     <div class="list-items-container">
                             {{#each this.data.actions}}
@@ -112,7 +111,7 @@
                 <!--This is for Contacts-->
                 {{#if this.data.contacts}}
                 <div class="sr5-hud-action sr5-hud-contacts">
-                    <input type="checkbox" id="toggle-contacts" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-contacts" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-contacts" class="sr5-hud-nav-switch">Contacts</label>
                     <div class="list-items-container">
                             {{#each this.data.contacts}}
@@ -125,7 +124,7 @@
                 {{#if this.data.spells}}
                 <!--This is for Spells-->
                 <div class="sr5-hud-action spells">
-                    <input type="checkbox" id="toggle-spell" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-spell" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-spell" class="sr5-hud-nav-switch"></label>
                     <!--Spell background image-->   
                     <div class="list-items-container">
@@ -156,7 +155,7 @@
                 <!--This is for Adept Powers-->
                 <div class="sr5-hud-action powers">
                     <!--Adept Power background image-->
-                    <input type="checkbox" id="toggle-power" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-power" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-power" class="sr5-hud-nav-switch">Power</label>
                     <div class="list-items-container">
                             {{#each this.data.adeptPowers}}
@@ -166,20 +165,20 @@
                     </div>
                 </div>
                 {{/if}}
-                {{#if this.data.qualitys.hasQualitys}}
+                {{#if this.data.qualities}}
                 <!--This is for Advantages Disadvantages-->
                 <div class="sr5-hud-action quality">
                     <!--Advantages background image-->
-                    <input type="checkbox" id="toggle-quality" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-quality" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-quality" class="sr5-hud-nav-switch">Advantages</label>
                     <div class="list-items-container">
-                        {{#each this.data.qualitys.positive}}
-                        <div class="sr5-hud-list-item sr5-hud-quality hud-positive">
+                        {{#each this.data.qualities.positive}}
+                        <div class="sr5-hud-list-item sr5-hud-qualit hud-positive" data-uuid="{{this.uuid}}">
                             <img class="action-image" src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
                         </div>
                         {{/each}}
-                        {{#each this.data.qualitys.negative}}
+                        {{#each this.data.qualities.negative}}
                         <div class="sr5-hud-list-item sr5-hud-quality hud-negative">
                             <img class="action-image" src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
