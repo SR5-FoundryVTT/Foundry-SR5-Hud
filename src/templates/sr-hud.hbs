@@ -8,6 +8,20 @@
                 <div class="icon-minimize right">
                     <i class="fa-solid fa-minimize"></i>
                 </div>
+
+                <skill-list-nav class="skill-list-active">
+                    <div class="empty-selector"></div>
+                    <input type="checkbox" id="toggle-skill-list" name="sr5-hud-skills" class="sr5-hud-skill-list" hidden>
+                    <label for="toggle-skill-list" class="sr5-hud-nav-switch"><i class="fa-solid fa-chevron-up sr5-hud-icons"></i></label>
+                    <div class="sr5-hud-skill-container">
+                        {{#each skillsWithRating}}
+                        <skill class="sr5-hud-skill">
+                            <div class="skillname">{{this.name}}</div>
+                            <div class="skill-value">{{this.value}}</div>
+                        </skill>
+                        {{/each}}
+                    </div>
+                </skill-list-nav>
             </div>
             <!--Avatar-->
             <avatar class="avatar grid-row2start-end6">

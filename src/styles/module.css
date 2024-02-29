@@ -51,23 +51,26 @@
         grid-template-columns: 16.5em 1em 4em auto auto auto 1em;
         grid-template-rows: auto auto 2em 2em 1.5em;
     }
+    .grid-row1-col3start{
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
     .header-bar {
         margin: 0.2em;
         display: grid; /* Using grid layout */
-        grid-template-columns: repeat(3, 1fr); /* Adjust based on the number of icons or elements you want to include */
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
         align-items: center; /* Center items vertically */
-        padding: 10px; /* Add some padding around the contents */
+        padding: 4px; /* Add some padding around the contents */
         background: linear-gradient(to right, #007bff, #6610f2); /* A gradient background for a modern look */
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
         border-radius: 5px; /* Rounded corners for a polished look */
         color: white; /* Text color, if you have any text inside */
         gap: 10px; /* Space between grid items */
-        &.row1-col3start{
-            grid-row-start: 1;
-            grid-column-start: 1;
-            grid-column-end: 4;
-        }
         &.sr5-hud-min {
+            grid-template-rows: auto auto;
             position: relative;
             top: 260px;
         }
@@ -93,6 +96,42 @@
         background-color: #626363;
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
+    }
+    .skill-list-active {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        .empty-selector{
+            grid-column-start: 1;
+            grid-column-end: 4;
+            border: solid 1px #1059db;
+            border-radius: 4px;
+            margin-right: 4px;
+            height: 14px;
+        }
+        .sr5-hud-nav-switch{
+            grid-column-end: 5;
+        }
+    }
+    .skill-list-active:hover{
+        color: #d6b80c;
+    }
+    .sr5-hud-skill-container{
+        width: 16.1em;
+        min-height: 16em;
+        max-height: fit-content;
+        display: none;
+        grid-template-columns: repeat(2,1fr);
+        position: absolute;
+        top: -190px;
+        left: 11px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background: linear-gradient(to right, #007bff, #6610f2);
+    }
+    .sr5-hud-skill-list:checked ~ .sr5-hud-skill-container{
+        display: grid;
     }
     .grid-row2start-end6{
         grid-row-start: 2;
@@ -321,10 +360,10 @@
             grid-row-end: 5;
         }
     }
+
     .fa-solid.fa-circle-plus{
         &.sr5-hud-icons{
             font-size: 3.5em;
-            color: #979797;
         }
         &.blank{
             display: none;
@@ -332,7 +371,6 @@
     }
     .fa-solid.fa-circle-plus:hover{
         &.sr5-hud-icons{
-            font-size: 3.5em;
             color: #d6b80c;
         }
         &.blank{
