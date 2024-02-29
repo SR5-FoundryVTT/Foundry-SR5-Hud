@@ -44,6 +44,10 @@ export default class Hud extends Application {
     }
 
     activateListeners(html) {
+        console.log(html[0])
+        let bar = html.find('.actions-bar')
+        console.log(bar)
+        
         super.activateListeners(html); // Ensure any inherited listeners are also activated.
     
         // Setup the toggle functionality for checkboxes
