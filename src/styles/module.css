@@ -226,9 +226,9 @@
     .list-items-container {
         display: none; /* Hidden by default, shown on hover */
         position: fixed;
-        bottom: 20%; /* Adjust if necessary to position correctly */
-        left: 24.3%; /* Start from the left edge of the .action */
-        width: auto;
+        bottom: 13.2%; /* Adjust if necessary to position correctly */
+        left: 23.0%; /* Start from the left edge of the .action */
+        width: 37.8em;
         min-width: 10em;
         height: auto;
         min-height: 10em;
@@ -238,7 +238,7 @@
         overflow: hidden; /* Prevents overflow outside the container */
         grid-template-rows: repeat(auto-fill, minmax(44px, auto)); /* Adjust row height as needed */
         grid-auto-flow: column; /* Directs items to new columns once the height exceeds container's limit */
-        grid-auto-columns: minmax(auto, 60px); /* Adjust column width as needed */
+        grid-auto-columns: minmax(auto, 30px); /* Adjust column width as needed */
         align-content: end; /* Aligns content to the bottum */
         gap: 0.1em; /* Space between items */
         padding: 0.3em; /* Padding inside the container */
@@ -266,7 +266,7 @@
         opacity: 1;
         pointer-events: all;
         .sr5-hud-list-item{
-            display: grid;
+            display: block;
         }
     }
     .sr5-hud-action.quality:focus ~ .list-items-container{
@@ -284,7 +284,6 @@
         height: 4em;
         width: 3em;
         align-content: center;
-        grid-template-rows: auto auto;
     }
     .sr5-hud-list-item.sr5-hud-quality.hud-negative{
         > p {
