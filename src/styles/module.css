@@ -119,24 +119,54 @@
     }
     .sr5-hud-skill-container{
         width: 16.1em;
-        min-height: 16em;
-        max-height: fit-content;
+        min-height: fit-content;
+        max-height: 43em;
         display: none;
-        grid-template-columns: repeat(2,1fr);
         position: absolute;
-        top: -190px;
+        bottom: 300px;
         left: 11px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         background: linear-gradient(to right, #007bff, #6610f2);
+        overflow-y: scroll;
     }
     .sr5-hud-skill-list:checked ~ .sr5-hud-skill-container{
-        display: grid; 
+        display:block;
     }
     .skill-list-active:has(.sr5-hud-skill-list:checked){
         .empty-selector{
             display: none;
         }
+    }
+    .sr5-hud-skill {
+        margin: 4px;
+        padding-bottom: 4px;
+        display: grid;
+        grid-template-columns: auto 1.5em 2em;
+        border: solid 1px #1059db;
+        border-radius: 4px;
+        color: white;
+        font-size: 10px;
+    }
+    .sr5-hud-skill:hover {
+        border: solid 1px #10a2db;
+        border-radius: 5px;
+        color: var(--buttonHighlight);
+    }
+    .skillname {
+        margin-left: 6px;
+        margin-top: 4px;
+        margin-right: 3px;
+        height: fit-content;
+        border-radius: 4px;
+    }
+    .skill-value {
+        margin-top: 4px;
+        padding-left: 3px;
+    }
+    .fa.solid.fa-list.sr5-hud-icons.skill-icon-list {
+        margin-top: 6px;
+        padding-left: 3px;
     }
     .grid-row2start-end6{
         grid-row-start: 2;

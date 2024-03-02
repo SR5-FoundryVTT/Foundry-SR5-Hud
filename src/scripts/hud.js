@@ -79,7 +79,7 @@ export default class Hud extends Application {
             const otherElements = html.find('.effects-icons-bar, .avatar');
             const headerBar = html.find('.header-bar');
             const skillContainer = html.find('.sr5-hud-skill-container');
-            
+
             // Check if we are currently minimized
             const isMinimized = headerBar.hasClass('sr5-hud-min');
     
@@ -122,7 +122,7 @@ export default class Hud extends Application {
                 // Then, move the header bar
                 setTimeout(() => {
                     headerBar.addClass('sr5-hud-min').animate({
-                        top: "260px"
+                        bottom: "20px"
                     }, 400, 'swing');
                 // Apply the left style to the skill container
                 skillContainer.css('left', '0px');

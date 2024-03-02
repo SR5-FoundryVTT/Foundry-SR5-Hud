@@ -4,7 +4,7 @@
                 <div class="icon-character left">
                     <i class="fa-solid fa-user-secret"></i>
                 </div>
-                <div class="header">header</div>
+                <div class="header">{{this.actor.name}}</div>
                 <div class="icon-minimize right">
                     <i class="fa-solid fa-minimize"></i>
                 </div>
@@ -14,11 +14,21 @@
                     <input type="checkbox" id="toggle-skill-list" name="sr5-hud-skills" class="sr5-hud-skill-list" hidden>
                     <label for="toggle-skill-list" class="sr5-hud-nav-switch"><i class="fa-solid fa-chevron-up sr5-hud-icons"></i></label>
                     <div class="sr5-hud-skill-container">
-                        {{#each skillsWithRating}}
                         <skill class="sr5-hud-skill">
-                            <div class="skillname">{{this.name}}</div>
-                            <div class="skill-value">{{this.value}}</div>
+                            <div class="skillname">Perception</div>
+                            <div class="skill-value">6</div>
+                            <i class="fa solid fa-list sr5-hud-icons skill-icon-list"></i>
                         </skill>
+                        <skill class="sr5-hud-skill">
+                            <div class="skillname">Perception</div>
+                            <div class="skill-value">6</div>
+                            <i class="fa solid fa-list sr5-hud-icons skill-icon-list"></i>
+                        </skill>
+                        {{#each this.actor.skillsWithRating}}
+                            <skill class="sr5-hud-skill">
+                                <div class="skillname" data-uuid="{{this.uuid}}">{{this.name}}</div>
+                                <div class="skill-value" >{{this.value}}</div>
+                            </skill>
                         {{/each}}
                     </div>
                 </skill-list-nav>
@@ -57,7 +67,7 @@
             <effects class="effects-icons-bar grid-row2start-end6">
                 <div class="effects">
                     {{#each this.actor.statuses}}
-                    <div class="effect-container">
+                    <div class="effect-container" data-uuid="{{this.uuid}}">
                         <img src='{{this.img}}' title='{{localize this.name}}'>
                         <div class="effect-text">'{{localize this.name}}'</div>
                     </div>
@@ -76,7 +86,7 @@
                     {{#if this.data.weapons.rangedWeapons}}
                     <div class="list-items-container">
                         {{#each this.data.weapons.rangedWeapons}}
-                        <div class="sr5-hud-list-item">
+                        <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
                         </div>
@@ -91,7 +101,7 @@
                     {{#if this.data.weapons.rangedWeapons}}
                     <div class="list-items-container">
                         {{#each this.data.weapons.rangedWeapons}}
-                        <div class="sr5-hud-list-item">
+                        <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
                         </div>
@@ -107,7 +117,7 @@
                     {{#if this.data.weapons.meleeWeapons}}
                         <div class="list-items-container">
                             {{#each this.data.weapons.meleeWeapons}}
-                            <div class="sr5-hud-list-item">
+                            <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                                 <img src='{{this.img}}' title='{{this.name}}'>
                                 <p>{{this.name}}</p>
                             </div>
@@ -122,7 +132,7 @@
                     <label for="toggle-action" class="sr5-hud-nav-switch">Actions</label>
                     <div class="list-items-container">
                             {{#each this.data.actions}}
-                            <div class="sr5-hud-list-item">
+                            <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                                 <img src='{{this.img}}' title='{{this.name}}'>
                                 <p>{{this.name}}</p>
                             </div>
@@ -137,7 +147,7 @@
                     <label for="toggle-contacts" class="sr5-hud-nav-switch">Contacts</label>
                     <div class="list-items-container">
                             {{#each this.data.contacts}}
-                            <div class="sr5-hud-list-item">
+                            <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                                 <img src='{{this.img}}' title='{{this.name}}'>
                                 <p>{{this.name}}</p>
                             </div>
@@ -153,31 +163,31 @@
                     <!--Spell background image-->   
                     <div class="list-items-container">
                         {{#each this.data.spells.combat}}
-                        <div class="r5-hud-list-item sr5-combat-spell">
+                        <div class="r5-hud-list-item sr5-combat-spell" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='this.name'>
                             <p>{{this.name}}</p>
                         </div>
                         {{/each}}
                         {{#each this.data.spells.detection}}
-                        <div class="sr5-hud-list-item sr5-detection-spell">
+                        <div class="sr5-hud-list-item sr5-detection-spell" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='this.name'>
                             <p>{{this.name}}</p>
                         </div>
                         {{/each}}
                         {{#each this.data.spells.manipulation}}
-                        <div class="sr5-hud-list-item sr5-manip-spell">
+                        <div class="sr5-hud-list-item sr5-manip-spell" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='this.name'>
                             <p>{{this.name}}</p>
                         </div>
                         {{/each}}
                         {{#each this.data.spells.illusion}}
-                        <div class="sr5-hud-list-item sr5-illusion-spell">
+                        <div class="sr5-hud-list-item sr5-illusion-spell" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='this.name'>
                             <p>{{this.name}}</p>
                         </div>
                         {{/each}}
                         {{#each this.data.spells.health}}
-                        <div class="sr5-hud-list-item sr5-health-spell">
+                        <div class="sr5-hud-list-item sr5-health-spell" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='this.name'>
                             <p>{{this.name}}</p>
                         </div>
@@ -193,7 +203,7 @@
                     <label for="toggle-power" class="sr5-hud-nav-switch">Power</label>
                     <div class="list-items-container">
                             {{#each this.data.adeptPowers}}
-                            <div lass="sr5-hud-list-item sr5-hud-power">
+                            <div lass="sr5-hud-list-item sr5-hud-power" data-uuid="{{this.uuid}}">
                                 <img class="power-image" src='{{this.img}}' title='{{this.name}}'>
                                 <p>{{this.name}}</p>
                             </div>
@@ -215,7 +225,7 @@
                         </div>
                         {{/each}}
                         {{#each this.data.qualities.negative}}
-                        <div class="sr5-hud-list-item sr5-hud-quality hud-negative">
+                        <div class="sr5-hud-list-item sr5-hud-quality hud-negative" data-uuid="{{this.uuid}}">
                             <img class="action-image" src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
                         </div>
