@@ -131,7 +131,12 @@
         background: linear-gradient(to right, #007bff, #6610f2);
     }
     .sr5-hud-skill-list:checked ~ .sr5-hud-skill-container{
-        display: grid;
+        display: grid; 
+    }
+    .skill-list-active:has(.sr5-hud-skill-list:checked){
+        .empty-selector{
+            display: none;
+        }
     }
     .grid-row2start-end6{
         grid-row-start: 2;
