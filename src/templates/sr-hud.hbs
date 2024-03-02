@@ -1,20 +1,44 @@
 <div class="sr5-hud">
     <div class="sr5-hud mainContent grid col7">
-            <!--Main Avatar Start-->
             <div class="header-bar row1-col3start">
                 <div class="icon-character left">
                     <i class="fa-solid fa-user-secret"></i>
                 </div>
-                <div class="header">header</div>
+                <div class="header">{{this.actor.name}}</div>
                 <div class="icon-minimize right">
                     <i class="fa-solid fa-minimize"></i>
                 </div>
-            </div>
-            <div class="avatar row2start">
-                <div class="section-wrapper">
-                    <div class="avatar-image">
-                        <img class="sr5-hud-character" src="{{this.actor.image}}" Title="{{this.actor.name}}">
+
+                <skill-list-nav class="skill-list-active">
+                    <div class="empty-selector"></div>
+                    <input type="checkbox" id="toggle-skill-list" name="sr5-hud-skills" class="sr5-hud-skill-list" hidden>
+                    <label for="toggle-skill-list" class="sr5-hud-nav-switch"><i class="fa-solid fa-chevron-up sr5-hud-icons"></i></label>
+                    <div class="sr5-hud-skill-container">
+                        <skill class="sr5-hud-skill">
+                            <div class="skillname">Perception</div>
+                            <div class="skill-value">6</div>
+                            <i class="fa solid fa-list sr5-hud-icons skill-icon-list"></i>
+                        </skill>
+                        <skill class="sr5-hud-skill">
+                            <div class="skillname">Perception</div>
+                            <div class="skill-value">6</div>
+                            <i class="fa solid fa-list sr5-hud-icons skill-icon-list"></i>
+                        </skill>
+                        {{#each this.actor.skillsWithRating}}
+                            <skill class="sr5-hud-skill">
+                                <div class="skillname" data-uuid="{{this.uuid}}">{{this.name}}</div>
+                                <div class="skill-value" >{{this.value}}</div>
+                            </skill>
+                        {{/each}}
                     </div>
+                </skill-list-nav>
+            </div>
+            <!--Avatar-->
+            <avatar class="avatar grid-row2start-end6">
+                <section class="section-wrapper">
+                    <avatar-image class="avatar-image">
+                        <img class="sr5-hud-character" src="{{this.actor.image}}" Title="{{this.actor.name}}">
+                    </avatar-image>
                     <!--Move section, not sure yet how bring in the movement meters into a bar, maybe gradiant coloring-->
                     <div class="movement">
                         
@@ -35,162 +59,181 @@
                         <div class="sr5-hud-stun sr5-hud-track"></div>
                         {{/for}}
                     </div>
-                </div>
-            </div>
+                </section>
+            </avatar>
             <div class="end-bar hidden">
             </div>
             <!--Main End, Effects Start-->
-            <div class="effects-icons-bar">
+            <effects class="effects-icons-bar grid-row2start-end6">
                 <div class="effects">
                     {{#each this.actor.statuses}}
-                    <div class="effect-container">
+                    <div class="effect-container" data-uuid="{{this.uuid}}">
                         <img src='{{this.img}}' title='{{localize this.name}}'>
-                        <div class="effect-text">Special Text</div>
+                        <div class="effect-text">'{{localize this.name}}'</div>
                     </div>
                     {{/each}}
-                    <div class="effect-container"></div>
                 </div>
-            </div>
+            </effects>
             <!--Effects End, Skills and Actions Start-->
             <div class="nav-selector-actions-skills">
             </div>
             <div class="actions-bar col10">
                 <!-- This is for the Weapon Boxes-->
-                <div class="sr5-hud-action sr5-hud-weapon">
+                <weapon class="sr5-hud-action sr5-hud-weapon">
                     <!--Here a Weapon Icon for a Gun-->
-                    <input type="checkbox" id="toggle-gun" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-gun" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-gun" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
                     {{#if this.data.weapons.rangedWeapons}}
                     <div class="list-items-container">
                         {{#each this.data.weapons.rangedWeapons}}
+                        <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='{{this.name}}'>
-                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                            <p>{{this.name}}</p>
+                        </div>
                         {{/each}}
                     </div>
                     {{/if}}
-                </div>
-                <div class="sr5-hud-action sr5-hud-weapon">
+                </weapon>
+                <weapon class="sr5-hud-action sr5-hud-weapon">
                     <!--Here a Weapon Icon for a Gun-->
-                    <input type="checkbox" id="toggle-weapon" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-weapon" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-weapon" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
                     {{#if this.data.weapons.rangedWeapons}}
                     <div class="list-items-container">
                         {{#each this.data.weapons.rangedWeapons}}
+                        <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='{{this.name}}'>
-                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                            <p>{{this.name}}</p>
+                        </div>
                         {{/each}}
                     </div>
                     {{/if}}
-                </div>
+                </weapon>
                 <!--This is the box for Melee Weapons only-->
-                <div class="sr5-hud-action sr5-hud-hand">
+                <weapon class="sr5-hud-action sr5-hud-hand">
                     <!--Here a Weapon icon for hand-->
-                    <input type="checkbox" id="toggle-hand" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-hand" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-hand" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
                     {{#if this.data.weapons.meleeWeapons}}
                         <div class="list-items-container">
                             {{#each this.data.weapons.meleeWeapons}}
+                            <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                                 <img src='{{this.img}}' title='{{this.name}}'>
-                                <div class="sr5-hud-list-item">{{this.name}}</div>
+                                <p>{{this.name}}</p>
+                            </div>
                             {{/each}}
                         </div>
                     {{/if}}
-                </div>
+                </weapon>
                 <!--This is for Actions-->
                 {{#if this.data.actions}}
-                <div class="sr5-hud-action sr5-hud-actions">
-                    <input type="checkbox" id="toggle-action" class="sr5-hud-checkbox" hidden>
+                <actions class="sr5-hud-action sr5-hud-actions">
+                    <input type="checkbox" id="toggle-action" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-action" class="sr5-hud-nav-switch">Actions</label>
                     <div class="list-items-container">
                             {{#each this.data.actions}}
-                            <img src='{{this.img}}' title='{{this.name}}'>
-                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                            <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
+                                <img src='{{this.img}}' title='{{this.name}}'>
+                                <p>{{this.name}}</p>
+                            </div>
                             {{/each}}
                     </div>
-                </div>
+                </actions>
                 {{/if}}
                 <!--This is for Contacts-->
                 {{#if this.data.contacts}}
-                <div class="sr5-hud-action sr5-hud-contacts">
-                    <input type="checkbox" id="toggle-contacts" class="sr5-hud-checkbox" hidden>
+                <contacts class="sr5-hud-action sr5-hud-contacts">
+                    <input type="checkbox" id="toggle-contacts" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-contacts" class="sr5-hud-nav-switch">Contacts</label>
                     <div class="list-items-container">
                             {{#each this.data.contacts}}
-                            <img src='{{this.img}}' title='{{this.name}}'>
-                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                            <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
+                                <img src='{{this.img}}' title='{{this.name}}'>
+                                <p>{{this.name}}</p>
+                            </div>
                             {{/each}}
                     </div>
-                </div>
+                </contacts>
                 {{/if}}
                 {{#if this.data.spells}}
                 <!--This is for Spells-->
-                <div class="sr5-hud-action spells">
-                    <input type="checkbox" id="toggle-spell" class="sr5-hud-checkbox" hidden>
+                <spells class="sr5-hud-action spells">
+                    <input type="checkbox" id="toggle-spell" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-spell" class="sr5-hud-nav-switch"></label>
                     <!--Spell background image-->   
                     <div class="list-items-container">
                         {{#each this.data.spells.combat}}
-                        <img src='{{this.img}}' title='this.name'>
-                        <div class="sr5-hud-list-item sr5-combat-spell">{{this.name}}</div>
+                        <div class="r5-hud-list-item sr5-combat-spell" data-uuid="{{this.uuid}}">
+                            <img src='{{this.img}}' title='this.name'>
+                            <p>{{this.name}}</p>
+                        </div>
                         {{/each}}
                         {{#each this.data.spells.detection}}
-                        <img src='{{this.img}}' title='this.name'>
-                            <div class="sr5-hud-list-item sr5-detection-spell">{{this.name}}</div>
+                        <div class="sr5-hud-list-item sr5-detection-spell" data-uuid="{{this.uuid}}">
+                            <img src='{{this.img}}' title='this.name'>
+                            <p>{{this.name}}</p>
+                        </div>
                         {{/each}}
                         {{#each this.data.spells.manipulation}}
-                        <img src='{{this.img}}' title='this.name'>
-                            <div class="sr5-hud-list-item sr5-manip-spell">{{this.name}}</div>
+                        <div class="sr5-hud-list-item sr5-manip-spell" data-uuid="{{this.uuid}}">
+                            <img src='{{this.img}}' title='this.name'>
+                            <p>{{this.name}}</p>
+                        </div>
                         {{/each}}
                         {{#each this.data.spells.illusion}}
-                        <img src='{{this.img}}' title='this.name'>
-                            <div class="sr5-hud-list-item sr5-illusion-spell">{{this.name}}</div>
+                        <div class="sr5-hud-list-item sr5-illusion-spell" data-uuid="{{this.uuid}}">
+                            <img src='{{this.img}}' title='this.name'>
+                            <p>{{this.name}}</p>
+                        </div>
                         {{/each}}
                         {{#each this.data.spells.health}}
-                        <img src='{{this.img}}' title='this.name'>
-                            <div class="sr5-hud-list-item sr5-health-spell">{{this.name}}</div>
+                        <div class="sr5-hud-list-item sr5-health-spell" data-uuid="{{this.uuid}}">
+                            <img src='{{this.img}}' title='this.name'>
+                            <p>{{this.name}}</p>
+                        </div>
                         {{/each}}
                     </div>
-                </div>
+                </spells>
                 {{/if}}
                 {{#if this.data.adeptPowers}}
                 <!--This is for Adept Powers-->
-                <div class="sr5-hud-action powers">
+                <powers class="sr5-hud-action powers">
                     <!--Adept Power background image-->
-                    <input type="checkbox" id="toggle-power" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-power" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-power" class="sr5-hud-nav-switch">Power</label>
                     <div class="list-items-container">
                             {{#each this.data.adeptPowers}}
-                            <img src='{{this.img}}' title='{{this.name}}'>
-                            <div class="sr5-hud-list-item">{{this.name}}</div>
+                            <div lass="sr5-hud-list-item sr5-hud-power" data-uuid="{{this.uuid}}">
+                                <img class="power-image" src='{{this.img}}' title='{{this.name}}'>
+                                <p>{{this.name}}</p>
+                            </div>
                             {{/each}}
                     </div>
-                </div>
+                </powers>
                 {{/if}}
-                {{#if this.data.qualitys.hasQualitys}}
+                {{#if this.data.qualities}}
                 <!--This is for Advantages Disadvantages-->
-                <div class="sr5-hud-action quality">
+                <qualities class="sr5-hud-action quality">
                     <!--Advantages background image-->
-                    <input type="checkbox" id="toggle-quality" class="sr5-hud-checkbox" hidden>
+                    <input type="checkbox" id="toggle-quality" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-quality" class="sr5-hud-nav-switch">Advantages</label>
                     <div class="list-items-container">
-                        {{#each this.data.qualitys.positive}}
-                        <div class="sr5-hud-list-item sr5-hud-quality hud-positive">
+                        {{#each this.data.qualities.positive}}
+                        <div class="sr5-hud-list-item sr5-hud-quality hud-positive" data-uuid="{{this.uuid}}">
                             <img class="action-image" src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
                         </div>
                         {{/each}}
-                        {{#each this.data.qualitys.negative}}
-                        <div class="sr5-hud-list-item sr5-hud-quality hud-negative">
+                        {{#each this.data.qualities.negative}}
+                        <div class="sr5-hud-list-item sr5-hud-quality hud-negative" data-uuid="{{this.uuid}}">
                             <img class="action-image" src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
                         </div>
                         {{/each}}
                     </div>
-                </div>
+                </qualities>
                 {{/if}}
             <!--End Bar moved to the end once end bar after image area is clicked-->
-            <div class="end-bar visible">
-
-            </div>
+            <div class="end-bar visible gone"></div>
     </div>
 </div>

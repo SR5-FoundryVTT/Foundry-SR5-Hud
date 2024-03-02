@@ -25,17 +25,18 @@
   .app.window-app.sr5-hud .window-title{
     display: none;
   }
-  .app.window-app.sr5-hud, .window-content {
+  .sr5-hud > section.window-content {
     display: block !important;
-    background: none !important;
     box-shadow: none !important;
+    background-image: url('../assets/frame.webp');
 }
 .window-app.sr5-hud .window-header {
     display: none;
     border-bottom: none;
 }
   .sr5-hud{
-    /*background: rgba(0, 0, 0, 0.596);*/
+    background-image: url('../assets/frame.webp'); /*Repeat needed as different elements needed to be tricked*/
+    box-shadow: none;
     &.mainContent{
         width: 73.2em;
     }
@@ -50,21 +51,28 @@
         grid-template-columns: 16.5em 1em 4em auto auto auto 1em;
         grid-template-rows: auto auto 2em 2em 1.5em;
     }
+    .grid-row1-col3start{
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
     .header-bar {
         margin: 0.2em;
         display: grid; /* Using grid layout */
-        grid-template-columns: repeat(3, 1fr); /* Adjust based on the number of icons or elements you want to include */
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
         align-items: center; /* Center items vertically */
-        padding: 10px; /* Add some padding around the contents */
+        padding: 4px; /* Add some padding around the contents */
         background: linear-gradient(to right, #007bff, #6610f2); /* A gradient background for a modern look */
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
         border-radius: 5px; /* Rounded corners for a polished look */
         color: white; /* Text color, if you have any text inside */
         gap: 10px; /* Space between grid items */
-        &.row1-col3start{
-            grid-row-start: 1;
-            grid-column-start: 1;
-            grid-column-end: 4;
+        &.sr5-hud-min {
+            grid-template-rows: auto auto;
+            position: relative;
+            top: 260px;
         }
     }
     .icon-character{
@@ -89,7 +97,78 @@
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
     }
-    .row2start{
+    .skill-list-active {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        .empty-selector{
+            grid-column-start: 1;
+            grid-column-end: 4;
+            border: solid 1px #1059db;
+            border-radius: 4px;
+            margin-right: 4px;
+            height: 14px;
+        }
+        .sr5-hud-nav-switch{
+            grid-column-end: 5;
+        }
+    }
+    .skill-list-active:hover{
+        color: #d6b80c;
+    }
+    .sr5-hud-skill-container{
+        width: 16.1em;
+        min-height: fit-content;
+        max-height: 43em;
+        display: none;
+        position: absolute;
+        bottom: 300px;
+        left: 11px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background: linear-gradient(to right, #007bff, #6610f2);
+        overflow-y: scroll;
+    }
+    .sr5-hud-skill-list:checked ~ .sr5-hud-skill-container{
+        display:block;
+    }
+    .skill-list-active:has(.sr5-hud-skill-list:checked){
+        .empty-selector{
+            display: none;
+        }
+    }
+    .sr5-hud-skill {
+        margin: 4px;
+        padding-bottom: 4px;
+        display: grid;
+        grid-template-columns: auto 1.5em 2em;
+        border: solid 1px #1059db;
+        border-radius: 4px;
+        color: white;
+        font-size: 10px;
+    }
+    .sr5-hud-skill:hover {
+        border: solid 1px #10a2db;
+        border-radius: 5px;
+        color: var(--buttonHighlight);
+    }
+    .skillname {
+        margin-left: 6px;
+        margin-top: 4px;
+        margin-right: 3px;
+        height: fit-content;
+        border-radius: 4px;
+    }
+    .skill-value {
+        margin-top: 4px;
+        padding-left: 3px;
+    }
+    .fa.solid.fa-list.sr5-hud-icons.skill-icon-list {
+        margin-top: 6px;
+        padding-left: 3px;
+    }
+    .grid-row2start-end6{
         grid-row-start: 2;
         grid-row-end: 6;
     }
@@ -102,9 +181,7 @@
     .avatar-image {
         width: 16em;
         height: 16em;
-        display: flex; /* Flex layout for any content inside, if any */
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
+        display: block;
         margin: 0.05em;
         border: 1px solid aqua; /* Frame effect */
         border-radius: 0.3em; /* Rounded corners */
@@ -113,6 +190,7 @@
         background-size: contain; /* Ensure the image fits within the div, maintaining aspect ratio */
         background-repeat: no-repeat; /* Prevents the image from repeating */
         margin-right: 0.5em;
+        contain: content;
     }
     
     .movement {
@@ -136,9 +214,7 @@
         display: grid;
     }
     .effects-icons-bar{
-        grid-row-start: 2;
         grid-column-start: 3;
-        grid-row-end: 6;
         background-color: #626363;
         border-top-right-radius: 6px;
         .effects{
@@ -147,6 +223,7 @@
             flex-direction: column;
             justify-content: center;
             margin-left: 0.4em;
+            margin-top: 0.5em;
         }
     }
     .effect-container{
@@ -223,9 +300,9 @@
     .list-items-container {
         display: none; /* Hidden by default, shown on hover */
         position: fixed;
-        bottom: 20%; /* Adjust if necessary to position correctly */
-        left: 24.3%; /* Start from the left edge of the .action */
-        width: auto;
+        bottom: 13.2%; /* Adjust if necessary to position correctly */
+        left: 23.0%; /* Start from the left edge of the .action */
+        width: 37.8em;
         min-width: 10em;
         height: auto;
         min-height: 10em;
@@ -235,7 +312,7 @@
         overflow: hidden; /* Prevents overflow outside the container */
         grid-template-rows: repeat(auto-fill, minmax(44px, auto)); /* Adjust row height as needed */
         grid-auto-flow: column; /* Directs items to new columns once the height exceeds container's limit */
-        grid-auto-columns: minmax(auto, 60px); /* Adjust column width as needed */
+        grid-auto-columns: minmax(auto, 30px); /* Adjust column width as needed */
         align-content: end; /* Aligns content to the bottum */
         gap: 0.1em; /* Space between items */
         padding: 0.3em; /* Padding inside the container */
@@ -263,6 +340,13 @@
         opacity: 1;
         pointer-events: all;
         .sr5-hud-list-item{
+            display: block;
+        }
+    }
+    .sr5-hud-action.quality:focus ~ .list-items-container{
+        display: grid;
+        pointer-events: all;
+        .sr5-hud-list-item{
             display: grid;
         }
     }
@@ -274,7 +358,6 @@
         height: 4em;
         width: 3em;
         align-content: center;
-        grid-template-rows: auto auto;
     }
     .sr5-hud-list-item.sr5-hud-quality.hud-negative{
         > p {
@@ -312,10 +395,10 @@
             grid-row-end: 5;
         }
     }
+
     .fa-solid.fa-circle-plus{
         &.sr5-hud-icons{
             font-size: 3.5em;
-            color: #979797;
         }
         &.blank{
             display: none;
@@ -323,7 +406,6 @@
     }
     .fa-solid.fa-circle-plus:hover{
         &.sr5-hud-icons{
-            font-size: 3.5em;
             color: #d6b80c;
         }
         &.blank{
