@@ -62,6 +62,7 @@
         display: grid; /* Using grid layout */
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto auto;
+        transition: 50ms;
         align-items: center; /* Center items vertically */
         padding: 4px; /* Add some padding around the contents */
         background: linear-gradient(to right, #007bff, #6610f2); /* A gradient background for a modern look */
@@ -70,7 +71,7 @@
         color: white; /* Text color, if you have any text inside */
         gap: 10px; /* Space between grid items */
         &.sr5-hud-min {
-            grid-template-rows: auto auto;
+            grid-template-rows: 2em;
             position: relative;
             top: 260px;
         }
