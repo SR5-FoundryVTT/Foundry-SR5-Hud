@@ -24,9 +24,9 @@
                             <div class="skill-value">6</div>
                             <i class="fa solid fa-list sr5-hud-icons skill-icon-list"></i>
                         </skill>
-                        {{#each this.actor.skillsWithRating}}
+                        {{#each this.data.skills}}
                             <skill class="sr5-hud-skill">
-                                <div class="skillname" data-uuid="{{this.uuid}}">{{this.name}}</div>
+                                <div class="skillname" data-uuid="{{this.id}}">{{localize this.label}}</div>
                                 <div class="skill-value" >{{this.value}}</div>
                             </skill>
                         {{/each}}
