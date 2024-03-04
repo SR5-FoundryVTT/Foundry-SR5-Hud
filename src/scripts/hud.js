@@ -78,54 +78,58 @@ export default class Hud extends Application {
             const actionBar = html.find('.actions-bar');
             const otherElements = html.find('.effects-icons-bar, .avatar');
             const headerBar = html.find('.header-bar');
-            const skillContainer = html.find('.sr5-hud-skill-container');
+            const skillSelector = html.find('.skill-list-active');
 
             // Check if we are currently minimized
-            const isMinimized = headerBar.hasClass('sr5-hud-min');
-    
-            if (isMinimized) {
-                // If so, we're expanding the HUD
-                // Animate the header bar back to its original position
-                headerBar.animate({
-                    top: "0px"
-                }, 400, 'swing', function() {
-                    $(this).removeClass('sr5-hud-min').removeAttr('style'); // Remove inline styles after animation
-    
-                    // Delay the action-bar animation until after the header bar has moved
-                    setTimeout(() => {
-                        actionBar.animate({
-                            opacity: 1
-                        }, 1, function() {
-                            // Remove inline styles after animation
-                            $(this).removeAttr('style');
-                        });
-                    }, 350); // This delay ensures the header bar moves first
-                });
-    
-                // Other elements should fade in without delay
-                otherElements.animate({
+        const isMinimized = headerBar.hasClass('sr5-hud-min');
+
+        if (isMinimized) {
+            // If so, we're expanding the HUD
+            // Animate the header bar back to its original position
+            headerBar.animate({
+                top: "0px"
+            }, 400, 'swing', function() {
+                $(this).removeClass('sr5-hud-min').removeAttr('style'); // Remove inline styles after animation
+
+                // Remove the inline style from the skill container as well
+                skillSelector.removeAttr('style');
+            });
+
+            // Delay the action-bar animation until after the header bar has moved
+            setTimeout(() => {
+                actionBar.animate({
                     opacity: 1
                 }, 400, function() {
-                    // Remove inline styles after animation
-                    $(this).removeAttr('style');
+                    $(this).removeAttr('style'); // Remove inline styles after animation
                 });
-    
-            } else {
-                // We're minimizing the HUD
-                // Fade out all elements, including the action-bar
-                actionBar.add(otherElements).animate({
-                    opacity: 0
-                }, 400, 'swing', function() {
-                    $(this).css('display', 'none');
+            }, 400);
+
+            // Other elements should fade in without delay
+            otherElements.animate({
+                opacity: 1
+            }, 400, function() {
+                $(this).removeAttr('style'); // Remove inline styles after animation
+            });
+
+        } else {
+            // We're minimizing the HUD
+            // Fade out all elements, including the action-bar
+            actionBar.add(otherElements).animate({
+                opacity: 0
+            }, 400, 'swing', function() {
+                $(this).css('display', 'none'); // Hide after animation
+            });
+
+            // Then, move the header bar and adjust the skill container
+            setTimeout(() => {
+                headerBar.addClass('sr5-hud-min').animate({
+                    bottom: "20px"
+                }, 400, 'swing');
+
+                // Apply the left style to the skill container only when minimizing
+                skillSelector.css({
+                    display:'none' 
                 });
-    
-                // Then, move the header bar
-                setTimeout(() => {
-                    headerBar.addClass('sr5-hud-min').animate({
-                        bottom: "20px"
-                    }, 400, 'swing');
-                // Apply the left style to the skill container
-                skillContainer.css('left', '0px');
             }, 100);
         }
     });

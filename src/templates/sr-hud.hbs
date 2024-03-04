@@ -14,16 +14,6 @@
                     <input type="checkbox" id="toggle-skill-list" name="sr5-hud-skills" class="sr5-hud-skill-list" hidden>
                     <label for="toggle-skill-list" class="sr5-hud-nav-switch"><i class="fa-solid fa-chevron-up sr5-hud-icons"></i></label>
                     <div class="sr5-hud-skill-container">
-                        <skill class="sr5-hud-skill">
-                            <div class="skillname">Perception</div>
-                            <div class="skill-value">6</div>
-                            <i class="fa solid fa-list sr5-hud-icons skill-icon-list"></i>
-                        </skill>
-                        <skill class="sr5-hud-skill">
-                            <div class="skillname">Perception</div>
-                            <div class="skill-value">6</div>
-                            <i class="fa solid fa-list sr5-hud-icons skill-icon-list"></i>
-                        </skill>
                         {{#each this.data.skills}}
                             <skill class="sr5-hud-skill">
                                 <div class="skillname" data-uuid="{{this.id}}">{{localize this.label}}</div>
