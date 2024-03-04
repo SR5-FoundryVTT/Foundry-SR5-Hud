@@ -145,15 +145,20 @@ export default class ActorData{
     get skills() {
         let skills = {
             ...this.actor.system.skills.active,
-            ...this.actor.system.skills.knowledge,
-            ...this.actor.system.skills.language,
+            ...this.actor.system.skills.knowledge?.academic?.value,
+            ...this.actor.system.skills.knowledge?.interests?.value,
+            ...this.actor.system.skills.knowledge?.professional?.value,
+            ...this.actor.system.skills.knowledge?.street?.value,
+            ...this.actor.system.skills.language?.value,
         }
 
         let skillsWithRating = [];
         for (var skill in skills) {
             if(skills[skill].value > 0) {
                 skillsWithRating.push({
-                    [skill]: skills[skill]
+                    ...skills[skill],
+                    id: skill,
+                    label: skills[skill].label ?? skills[skill].name
                 })
             }
          }
