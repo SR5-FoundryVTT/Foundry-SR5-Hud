@@ -317,7 +317,7 @@
         align-content: end; /* Aligns content to the bottum */
         gap: 0.1em; /* Space between items */
         padding: 0.3em; /* Padding inside the container */
-        z-index: 100; /* Ensure it's above other elements */
+        z-index: 1; /* Ensure it's above other elements */
         /* Transition for smoother appearance/disappearance */
         transition: opacity 0.2s ease-in-out;
         opacity: 0; /* Start fully transparent */
@@ -470,4 +470,26 @@ img.sr5-hud-character {
     border: none;
     display: flex;
     align-items: center;
+}
+.tooltiptext {
+    display: none;
+    position: fixed;
+    z-index: 900;
+    bottom: 21em;
+    left: 41.3em;
+    transform: translateX(-50%);
+    background-color: #fff;
+    color: #000;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    width: 37.7em;
+    height: 16em;
+    pointer-events: auto;
+}
+/* Show the tooltip text when hovering over a list item */
+.sr5-hud-list-item:hover .tooltiptext {
+    display: grid;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
 }
