@@ -1,5 +1,5 @@
-import Hud from "./hud.js";
-import Settings from "./settings.js";
+import Hud from "./hud/hud.js";
+import Settings from "./config/settings.js";
 
   Hooks.on("ready", () => {
     Settings.addAllSettings();
