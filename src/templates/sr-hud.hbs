@@ -74,51 +74,13 @@
                     <!--Here a Weapon Icon for a Gun-->
                     <input type="checkbox" id="toggle-gun" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-gun" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
-                    {{#if this.data.weapons.rangedWeapons}}
-                    <div class="list-items-container">
-                        {{#each this.data.weapons.rangedWeapons}}
-                        <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
-                            <img src='{{this.img}}' title='{{this.name}}'>
-                            <p>{{this.name}}</p>
-                            <tooltip class="tooltiptext">
-                                <header class="tool-title"><h1>{{this.name}}</h1></header>
-                                <div class="tool-helper"><p>{{localize "Select this Weapon for Quick use"}}</p></div>
-                                <!--<img src="{{this.img}}" title="{{this.name}}">-->
-                                <div class="tool-description">{{this.system.description}}</div>
-                                <div class="tool-ammo">{{this.ammo.current.value}} / {{this.ammo.current.max}}</div>
-                                <div class="range">{{this.range.ranges.short}}/ {{this.range.ranges.medium}}/{{this.range.ranges.long}}/{{this.range.ranges.extreme}}</div>
-                                <div>{{this.rc.base}}</div>
-                                <div>{{this.modes.single_shot}}</div>
-                            </tooltip>
-                        </div>
-                        {{/each}}
-                    </div>
-                    {{/if}}
+                    {{> 'modules/sr5-hud/templates/partials/rangedWeaponPartial.hbs' rangedWeapons=this.data.weapons.rangedWeapons }}
                 </weapon>
                 <weapon class="sr5-hud-action sr5-hud-weapon">
                     <!--Here a Weapon Icon for a Gun-->
                     <input type="checkbox" id="toggle-weapon" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-weapon" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
-                    {{#if this.data.weapons.rangedWeapons}}
-                    <div class="list-items-container">
-                        {{#each this.data.weapons.rangedWeapons}}
-                        <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
-                            <img src='{{this.img}}' title='{{this.name}}'>
-                            <p>{{this.name}}</p>
-                                                        <tooltip class="tooltiptext">
-                                <header class="tool-title"><h1>{{this.name}}</h1></header>
-                                <div class="tool-helper"><p>{{localize "Select this Weapon for Quick use"}}</p></div>
-                                <!--<img src="{{this.img}}" title="{{this.name}}">-->
-                                <div class="tool-description">{{this.system.description}}</div>
-                                <div class="tool-ammo">{{this.ammo.current.value}} / {{this.ammo.current.max}}</div>
-                                <div class="range">{{this.range.ranges.short}}/ {{this.range.ranges.medium}}/{{this.range.ranges.long}}/{{this.range.ranges.extreme}}</div>
-                                <div>{{this.rc.base}}</div>
-                                <div>{{this.modes.single_shot}}</div>
-                            </tooltip>
-                        </div>
-                        {{/each}}
-                    </div>
-                    {{/if}}
+                    {{> 'modules/sr5-hud/templates/partials/rangedWeaponPartial.hbs' rangedWeapons=this.data.weapons.rangedWeapons }}
                 </weapon>
                 <!--This is the box for Melee Weapons only-->
                 <weapon class="sr5-hud-action sr5-hud-hand">

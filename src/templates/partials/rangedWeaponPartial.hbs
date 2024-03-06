@@ -1,0 +1,19 @@
+<div class="list-items-container">
+    {{log rangedWeapons}}
+    {{#each rangedWeapons as | weapon |}}
+    <div class="sr5-hud-list-item" data-uuid="{{uuid}}">
+        <img src='{{img}}' title='{{name}}'>
+        <p>{{name}}</p>
+        <tooltip class="tooltiptext">
+            <header class="tool-title"><h1>{{name}}</h1></header>
+            <div class="tool-helper"><p>{{localize "Select this Weapon for Quick use"}}</p></div>
+            <!--<img src="{{this.img}}" title="{{this.name}}">-->
+            <div class="tool-description">{{system.description.value}}</div>
+            <div class="tool-ammo">{{system.ammo.current.value}} / {{system.ammo.current.max}}</div>
+            <div class="range">{{system.range.ranges.short}}/ {{system.range.ranges.medium}}/{{system.range.ranges.long}}/{{system.range.ranges.extreme}}</div>
+            <div>{{rc.base}}</div>
+            <div>{{modes.single_shot}}</div>
+        </tooltip>
+    </div>
+    {{/each}}
+</div>                     
