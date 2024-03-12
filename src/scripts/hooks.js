@@ -1,6 +1,10 @@
 import Hud from "./hud/hud.js";
 import Settings from "./config/settings.js";
 
+Hooks.on("init", () => {
+   loadTemplates(["modules/sr5-hud/templates/partials/rangedWeaponPartial.hbs"])
+ });
+
   Hooks.on("ready", () => {
     Settings.addAllSettings();
     ui.SR5HUD = new Hud();

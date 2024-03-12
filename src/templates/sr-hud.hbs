@@ -12,12 +12,13 @@
                 <skill-list-nav class="skill-list-active">
                     <div class="empty-selector"></div>
                     <input type="checkbox" id="toggle-skill-list" name="sr5-hud-skills" class="sr5-hud-skill-list" hidden>
-                    <label for="toggle-skill-list" class="sr5-hud-nav-switch"><i class="fa-solid fa-chevron-up sr5-hud-icons"></i></label>
+                    <label for="toggle-skill-list" class="sr5-hud-nav-skill-switch"><i class="fa-solid fa-chevron-up sr5-hud-icons"></i></label>
                     <div class="sr5-hud-skill-container">
                         {{#each this.data.skills}}
-                            <skill class="sr5-hud-skill">
+                            <skill class="sr5-hud-skill" >
                                 <div class="skillname" data-uuid="{{this.id}}">{{localize this.label}}</div>
                                 <div class="skill-value" >{{this.value}}</div>
+                                <i class="fa-light fa-pen-to-square sr5-hud-icons skill-icon-list"></i>
                             </skill>
                         {{/each}}
                     </div>
@@ -68,36 +69,17 @@
             <div class="nav-selector-actions-skills">
             </div>
             <div class="actions-bar col10">
-                <!-- This is for the Weapon Boxes-->
                 <weapon class="sr5-hud-action sr5-hud-weapon">
                     <!--Here a Weapon Icon for a Gun-->
                     <input type="checkbox" id="toggle-gun" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-gun" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
-                    {{#if this.data.weapons.rangedWeapons}}
-                    <div class="list-items-container">
-                        {{#each this.data.weapons.rangedWeapons}}
-                        <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
-                            <img src='{{this.img}}' title='{{this.name}}'>
-                            <p>{{this.name}}</p>
-                        </div>
-                        {{/each}}
-                    </div>
-                    {{/if}}
+                    {{> 'modules/sr5-hud/templates/partials/rangedWeaponPartial.hbs' rangedWeapons=this.data.weapons.rangedWeapons }}
                 </weapon>
                 <weapon class="sr5-hud-action sr5-hud-weapon">
                     <!--Here a Weapon Icon for a Gun-->
                     <input type="checkbox" id="toggle-weapon" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-weapon" class="sr5-hud-nav-switch"><i class="fa-solid fa-circle-plus sr5-hud-icons"></i></label>
-                    {{#if this.data.weapons.rangedWeapons}}
-                    <div class="list-items-container">
-                        {{#each this.data.weapons.rangedWeapons}}
-                        <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
-                            <img src='{{this.img}}' title='{{this.name}}'>
-                            <p>{{this.name}}</p>
-                        </div>
-                        {{/each}}
-                    </div>
-                    {{/if}}
+                    {{> 'modules/sr5-hud/templates/partials/rangedWeaponPartial.hbs' rangedWeapons=this.data.weapons.rangedWeapons }}
                 </weapon>
                 <!--This is the box for Melee Weapons only-->
                 <weapon class="sr5-hud-action sr5-hud-hand">
@@ -117,14 +99,18 @@
                 </weapon>
                 <!--This is for Actions-->
                 {{#if this.data.actions}}
-                <actions class="sr5-hud-action sr5-hud-actions">
+                <actions class="sr5-hud-action sr5-hud-selector action-selector">
                     <input type="checkbox" id="toggle-action" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
-                    <label for="toggle-action" class="sr5-hud-nav-switch">Actions</label>
+                    <label for="toggle-action" class="sr5-hud-nav-switch" title="{{localize action}}"></label>
                     <div class="list-items-container">
                             {{#each this.data.actions}}
                             <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                                 <img src='{{this.img}}' title='{{this.name}}'>
                                 <p>{{this.name}}</p>
+                                <tooltip class="tooltiptext">
+                                    <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                    <div class="tool-helper"><p>{{localize "Select an Action to use on selection"}}</p></div>
+                                </tooltip>
                             </div>
                             {{/each}}
                     </div>
@@ -132,14 +118,18 @@
                 {{/if}}
                 <!--This is for Contacts-->
                 {{#if this.data.contacts}}
-                <contacts class="sr5-hud-action sr5-hud-contacts">
+                <contacts class="sr5-hud-action sr5-hud-selector contacts-selector" title="Contacts">
                     <input type="checkbox" id="toggle-contacts" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
-                    <label for="toggle-contacts" class="sr5-hud-nav-switch">Contacts</label>
-                    <div class="list-items-container">
+                    <label for="toggle-contacts" class="sr5-hud-nav-switch"></label>
+                    <div class="list-items-container contacts">
                             {{#each this.data.contacts}}
                             <div class="sr5-hud-list-item" data-uuid="{{this.uuid}}">
                                 <img src='{{this.img}}' title='{{this.name}}'>
                                 <p>{{this.name}}</p>
+                                <tooltip class="tooltiptext">
+                                    <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                    <div class="tool-helper"><p>{{localize "Call a Contact on selection"}}</p></div>
+                                </tooltip>
                             </div>
                             {{/each}}
                     </div>
@@ -147,7 +137,7 @@
                 {{/if}}
                 {{#if this.data.spells}}
                 <!--This is for Spells-->
-                <spells class="sr5-hud-action spells">
+                <spells class="sr5-hud-action sr5-hud-selector spells-selector">
                     <input type="checkbox" id="toggle-spell" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-spell" class="sr5-hud-nav-switch"></label>
                     <!--Spell background image-->   
@@ -156,30 +146,50 @@
                         <div class="r5-hud-list-item sr5-combat-spell" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='this.name'>
                             <p>{{this.name}}</p>
+                            <tooltip class="tooltiptext">
+                                <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                <div class="tool-helper"><p>{{localize "Cast a Spell on selection"}}</p></div>
+                            </tooltip>
                         </div>
                         {{/each}}
                         {{#each this.data.spells.detection}}
                         <div class="sr5-hud-list-item sr5-detection-spell" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='this.name'>
                             <p>{{this.name}}</p>
+                            <tooltip class="tooltiptext">
+                                <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                <div class="tool-helper"><p>{{localize "Cast a Spell on selection"}}</p></div>
+                            </tooltip>
                         </div>
                         {{/each}}
                         {{#each this.data.spells.manipulation}}
                         <div class="sr5-hud-list-item sr5-manip-spell" data-uuid="{{this.uuid}}">
                             <img src='{{this.img}}' title='this.name'>
                             <p>{{this.name}}</p>
+                            <tooltip class="tooltiptext">
+                                <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                <div class="tool-helper"><p>{{localize "Cast a Spell on selection"}}</p></div>
+                            </tooltip>
                         </div>
                         {{/each}}
                         {{#each this.data.spells.illusion}}
                         <div class="sr5-hud-list-item sr5-illusion-spell" data-uuid="{{this.uuid}}">
-                            <img src='{{this.img}}' title='this.name'>
+                            <img src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
+                            <tooltip class="tooltiptext">
+                                <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                <div class="tool-helper"><p>{{localize "Cast a Spell on selection"}}</p></div>
+                            </tooltip>
                         </div>
                         {{/each}}
                         {{#each this.data.spells.health}}
                         <div class="sr5-hud-list-item sr5-health-spell" data-uuid="{{this.uuid}}">
-                            <img src='{{this.img}}' title='this.name'>
+                            <img src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
+                            <tooltip class="tooltiptext">
+                                <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                <div class="tool-helper"><p>{{localize "Cast a Spell on selection"}}</p></div>
+                            </tooltip>
                         </div>
                         {{/each}}
                     </div>
@@ -187,15 +197,19 @@
                 {{/if}}
                 {{#if this.data.adeptPowers}}
                 <!--This is for Adept Powers-->
-                <powers class="sr5-hud-action powers">
+                <powers class="sr5-hud-action sr5-hud-selector powers-selector">
                     <!--Adept Power background image-->
                     <input type="checkbox" id="toggle-power" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
-                    <label for="toggle-power" class="sr5-hud-nav-switch">Power</label>
+                    <label for="toggle-power" class="sr5-hud-nav-switch"></label>
                     <div class="list-items-container">
                             {{#each this.data.adeptPowers}}
                             <div lass="sr5-hud-list-item sr5-hud-power" data-uuid="{{this.uuid}}">
                                 <img class="power-image" src='{{this.img}}' title='{{this.name}}'>
                                 <p>{{this.name}}</p>
+                                <tooltip class="tooltiptext">
+                                    <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                    <div class="tool-helper"><p>{{localize "Select a Power to use on selection"}}</p></div>
+                                </tooltip>
                             </div>
                             {{/each}}
                     </div>
@@ -203,7 +217,7 @@
                 {{/if}}
                 {{#if this.data.qualities}}
                 <!--This is for Advantages Disadvantages-->
-                <qualities class="sr5-hud-action quality">
+                <qualities class="sr5-hud-action sr5-hud-selector quality-selector">
                     <!--Advantages background image-->
                     <input type="checkbox" id="toggle-quality" name="radio-sr5-hud" class="sr5-hud-checkbox" hidden>
                     <label for="toggle-quality" class="sr5-hud-nav-switch">Advantages</label>
@@ -212,12 +226,20 @@
                         <div class="sr5-hud-list-item sr5-hud-quality hud-positive" data-uuid="{{this.uuid}}">
                             <img class="action-image" src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
+                            <tooltip class="tooltiptext">
+                                <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                <div class="tool-helper"><p>{{localize "Quality to use on selection"}}</p></div>
+                            </tooltip>
                         </div>
                         {{/each}}
                         {{#each this.data.qualities.negative}}
                         <div class="sr5-hud-list-item sr5-hud-quality hud-negative" data-uuid="{{this.uuid}}">
                             <img class="action-image" src='{{this.img}}' title='{{this.name}}'>
                             <p>{{this.name}}</p>
+                            <tooltip class="tooltiptext">
+                                <header class="tool-title"><h1>{{this.name}}</h1></header>
+                                <div class="tool-helper"><p>{{localize "Quality to use on selection"}}</p></div>
+                            </tooltip>
                         </div>
                         {{/each}}
                     </div>

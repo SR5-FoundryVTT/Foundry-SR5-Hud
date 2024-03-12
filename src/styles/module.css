@@ -1,5 +1,20 @@
 /* Varibles*/
 :root{
+    /*Images*/
+    --spell: url('../assets/spells.webp');
+    --spell-hover: url('../assets/spells_hover.webp');
+    --powers: url('../assets/powers.webp');
+    --powers-hover: url('../assets/powers_hover.webp');
+    --quality: url('../assets/skill.png');
+    --quality-hover: url('../assets/skill.png');
+    --action: url('../assets/skill.png');
+    --action-hover: url('../assets/skill.png');
+    --contacts: url('../assets/contacts_hover.webp');
+    --contacts-hover: url('../assets/contacts_hover.webp');
+    --item: url('../assets/');
+    --item-hover: url('../assets/');
+    --topPostion: 61.7vh;
+    /*Colors*/
     --primaryBackground: rgba(0, 0, 0, 0.445);
     --buttonMain: rgb(83, 1, 1);
     --buttonsecdry: rgb(4, 4, 170);
@@ -20,6 +35,7 @@
     8px 0 6px -6px rgba(0, 0, 0, 0.6), /* Horizontal shadow on the right */
     0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
     --headerImage: url('../assets/biomon-header.webp') no-repeat center center;
+    --ease:100ms ease-in-out;
   }
 
   .app.window-app.sr5-hud .window-title{
@@ -34,11 +50,13 @@
     display: none;
     border-bottom: none;
 }
-  .sr5-hud{
-    background-image: url('../assets/frame.webp'); /*Repeat needed as different elements needed to be tricked*/
+.sr5-hud {
+    position: fixed;
+    background-image: url('../assets/frame.webp');
     box-shadow: none;
-    &.mainContent{
-        width: 73.2em;
+    &.mainContent {
+        width: 72.2em;
+        max-width: 100vw;
     }
     .window-header.flexrow.draggable.resizable{
         background: none;
@@ -111,7 +129,7 @@
             margin-right: 4px;
             height: 14px;
         }
-        .sr5-hud-nav-switch{
+        .sr5-hud-nav-skill-switch{
             grid-column-end: 5;
         }
     }
@@ -125,7 +143,7 @@
         display: none;
         position: absolute;
         bottom: 300px;
-        left: 11px;
+        left: 3px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         background: linear-gradient(to right, #007bff, #6610f2);
@@ -275,14 +293,13 @@
         }
     }
     .sr5-hud-action{
-        height: 5em;
         width: 4em;
+        height: 5em;
         background-color: rgba(255, 228, 196, 0.164);
-        border: 0.2em solid #626363;
+        /*border: 0.2em solid #626363;*/
         border-radius: 0.2em;
         position: relative;
-        display: flex;
-        justify-content: top;
+        display: grid;
         align-items: center;
         &.blank{
             background-color: bisque;
@@ -294,15 +311,77 @@
            height: 4em; 
         }
     }
-
+    .sr5-hud-nav-switch{
+        width: 4em;
+        height: 5em;
+    }
+    .sr5-hud-selector{
+        width: 4em;
+        background-repeat: no-repeat;
+        object-fit: contain;
+        background-size: contain;
+        background-blend-mode: multiply;
+        transition: background-color var(--ease);
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border: none;
+    }
+    .sr5-hud-selector:hover{
+        width: 4em;
+        background-repeat: no-repeat; 
+        background-blend-mode: soft-light;
+        object-fit: contain;
+        background-size: contain;
+        transition: background-color var(--ease);
+        border: none;
+    }
+    .action-selector{
+        background-image: var(--action);
+    }
+    .action-selector:hover{
+        background-image: var(--action-hover);
+    }
+    .contacts-selector{
+        background-image: var(--contacts);
+    }
+    .contacts-selector:hover{
+        background-image: var(--contacts-hover);
+    }
+    .spells-selector{
+        background-image: var(--spell);
+    }
+    .spells-selector:hover{
+        transition: background-image var(--ease);
+        background-image: var(--spell-hover)
+        /*background-color: #40a8ee1e;*/
+    }
+    .powers-selector{
+        background-image: var(--powers);
+    }
+    .powers-selector:hover{
+        background-image: var(--powers-hover);
+    }
+    .quality-selector{
+        background-image: var(--quality);
+    }
+    .quality-selector:hover{
+        background-image: var(--quality-hover);
+    }
+    .sr5-hud-selected-item{
+        background-image: var(--item);
+    }
+    .sr5-hud-selected-item:hover{
+        background-image: var(--item-hover);
+    }
     .sr5-hud-action:hover {
         display: grid; /* Show on hover */
+        background-size: contain;
     }
     .list-items-container {
         display: none; /* Hidden by default, shown on hover */
         position: fixed;
-        bottom: 13.2%; /* Adjust if necessary to position correctly */
-        left: 23.0%; /* Start from the left edge of the .action */
+        bottom: 13.5%; /* Adjust if necessary to position correctly */
+        left: 21.8%; /* Start from the left edge of the .action */
         width: 37.8em;
         min-width: 10em;
         height: auto;
@@ -317,7 +396,7 @@
         align-content: end; /* Aligns content to the bottum */
         gap: 0.1em; /* Space between items */
         padding: 0.3em; /* Padding inside the container */
-        z-index: 100; /* Ensure it's above other elements */
+        z-index: 1; /* Ensure it's above other elements */
         /* Transition for smoother appearance/disappearance */
         transition: opacity 0.2s ease-in-out;
         opacity: 0; /* Start fully transparent */
@@ -334,12 +413,19 @@
         display: grid;
         transition: opacity 0.2s ease-in-out;
         opacity: 1;
+        object-fit: inherit;
     }
     .sr5-hud-checkbox:checked ~ .list-items-container {
         display: grid;
         transition: opacity 0.2s ease-in-out;
         opacity: 1;
         pointer-events: all;
+        &.contacts{
+            background-image: var(--contacts);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right;
+        }
         .sr5-hud-list-item{
             display: block;
         }
@@ -400,6 +486,8 @@
     .fa-solid.fa-circle-plus{
         &.sr5-hud-icons{
             font-size: 3.5em;
+            margin-top: 0.2em;
+            margin-left: 0.04em;
         }
         &.blank{
             display: none;
@@ -408,6 +496,8 @@
     .fa-solid.fa-circle-plus:hover{
         &.sr5-hud-icons{
             color: #d6b80c;
+            margin-top: 0.19em;
+            margin-left: 0.04em;
         }
         &.blank{
             display: none;
@@ -470,4 +560,26 @@ img.sr5-hud-character {
     border: none;
     display: flex;
     align-items: center;
+}
+.tooltiptext {
+    display: none;
+    position: fixed;
+    z-index: 900;
+    left: 40%;
+    bottom: 33.5%; /* Adjust if necessary to position correctly */
+    transform: translateX(-50%);
+    background-color: #fff;
+    color: #000;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    width: 37.7em;
+    height: 16em;
+    pointer-events: auto;
+}
+/* Show the tooltip text when hovering over a list item */
+.sr5-hud-list-item:hover .tooltiptext {
+    display: grid;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
 }
